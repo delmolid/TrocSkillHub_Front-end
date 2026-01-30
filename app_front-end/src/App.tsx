@@ -1,14 +1,11 @@
 
 import "./styles/App.css";
 
-function App() {
-  const trocskillhub = "Trocskill-Hub";
+import { Header } from "./components/Header";
+import { JSX } from "react";
 
-  return (
-    <>
-      <p>Welcome to {trocskillhub}</p>
-    </>
-  );
+function App(): JSX.Element {
+  return <Header />;
 }
 
 export default App;
