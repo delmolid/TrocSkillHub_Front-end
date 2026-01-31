@@ -1,0 +1,141 @@
+/* UserCard.css - Styles pour le composant Carte Profil Utilisateur */
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  max-width: 200px;
+}
+
+/* Photo de profil */
+.user-card__photo-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 6px solid #6B4FA0; /* Bordure violette/mauve */
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-card__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Nom complet de l'utilisateur */
+.user-card__name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333333;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+
+/* Informations de contact */
+.user-card__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.user-card__contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  color: #333333;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Lien cliquable */
+.user-card__link {
+  cursor: pointer;
+}
+
+.user-card__link:hover {
+  color: #008B8B;
+  transform: translateX(3px);
+}
+
+.user-card__link:focus {
+  outline: 2px solid #008B8B;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Icônes */
+.user-card__icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  color: #555555;
+}
+
+.user-card__icon--linkedin {
+  color: #0077B5; /* Couleur LinkedIn */
+}
+
+.user-card__icon--instagram {
+  color: #E4405F; /* Couleur Instagram */
+}
+
+/* Texte */
+.user-card__text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+/* Sur tablette */
+@media (max-width: 768px) {
+  .user-card {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .user-card__photo-container {
+    width: 120px;
+    height: 120px;
+    border-width: 4px;
+  }
+
+  .user-card__icon {
+    font-size: 18px;
+  }
+
+  .user-card__text {
+    font-size: 13px;
+  }
+}
+
+/* Sur mobile */
+@media (max-width: 480px) {
+  .user-card__photo-container {
+    width: 100px;
+    height: 100px;
+  }
+
+  .user-card__contact-info {
+    gap: 10px;
+  }
+}
+
+/* États accessibilité */
+.user-card__link:focus-visible {
+  outline: 2px solid #008B8B;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Animation au survol pour les liens */
+.user-card__link:hover .user-card__icon {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
