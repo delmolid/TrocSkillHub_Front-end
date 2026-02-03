@@ -5,14 +5,16 @@
   display: flex;
   align-items: center;
   padding: 10px 20px;
+  border-bottom: 5px solid #176B87;
+  color: black;
+  
 }
 .navbar h1 {
   font-size: 20px;
   margin: 0;
+  color :#176B87;
 }
-.h1{
-  color: #176B87;
-}
+
 
 /* Groupes */
 .navbar ul {
@@ -37,6 +39,7 @@
 .nav-right {
   flex: 1;
   justify-content: flex-end;
+  border-color: #176B87;
 }
 
 /* Avatar */
@@ -47,8 +50,7 @@
 }
 
 .navbar ul .nav-item a:hover {
-  background-color: var(--dark-purple);
-  color: var(--white);
+  background-color: var(--color-primary-dark);
 }
 
 /* Menu deroulant pour le mobile first */
