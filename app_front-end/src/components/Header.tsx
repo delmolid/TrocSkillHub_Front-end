@@ -1,5 +1,5 @@
 import "../styles/Header.css";
-import reactLogo from "../assets/images/react.svg";
+import reactLogo from "../assets/Ada_Lovelace.jpg";
 
 export const Header: React.FC = () => {
   return (

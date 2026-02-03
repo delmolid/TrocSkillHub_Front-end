@@ -6,6 +6,7 @@
 import React from "react";
 import ProfileMain from "./components/ProfilePageComponents/ProfileMain";
 import "./App.css";
+import { Header } from "./components/Header";
 
 const App: React.FC = () => {
   // ID de l'utilisateur à afficher
@@ -13,7 +14,9 @@ const App: React.FC = () => {
   const userId = 3; // Affiche Ada lovelace
 
   return (
+    
     <div className="app">
+      <Header/>
       {/* Contenu principal */}
       <ProfileMain userId={userId} />
 

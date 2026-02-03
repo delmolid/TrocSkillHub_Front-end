@@ -15,7 +15,7 @@
   height: 150px;
   border-radius: 50%;
   overflow: hidden;
-  border: 6px solid #176B87; /* Bordure violette/mauve */
+  border: 6px solid #176B87;
   margin-bottom: 20px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
