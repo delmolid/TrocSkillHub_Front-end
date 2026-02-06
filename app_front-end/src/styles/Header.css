@@ -1,23 +1,15 @@
-/* Header.css */
-
-/* Parent principal */
+/* ===== STYLES PAR DÉFAUT (Desktop) ===== */
 .navbar {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  border-bottom: 5px solid #176B87;
-  color: black;
-  
-}
-.navbar h1 {
-  font-size: 20px;
-  margin: 0;
-  color :#176B87;
+  padding: 15px 30px;
+  position: relative;
 }
 
-
-/* Groupes */
-.navbar ul {
+.nav-left,
+.nav-center,
+.nav-right {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -26,61 +18,146 @@
   padding: 0;
 }
 
-/* Répartition */
-.nav-left {
-  flex: 1;
+.nav-left h1 {
+  font-size: 20px;
+  margin: 0;
 }
 
-.nav-center {
-  flex: 2;
-  justify-content: center;
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 40px;
 }
 
-.nav-right {
-  flex: 1;
-  justify-content: flex-end;
-  border-color: #176B87;
-}
-
-/* Avatar */
 .nav-avatar {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-.navbar ul .nav-item a:hover {
-  background-color: var(--color-primary-dark);
+/* Bouton hamburger caché par défaut */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
-/* Menu deroulant pour le mobile first */
-/* .navbar ul .nav-item .sub-menu {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  right: 5%;
-  transition: opacity 0.5s ease;
-  display: block;
-  background-color: var(--white);
-} 
-
-.navbar ul .nav-item:hover .sub-menu,
-.navbar ul .nav-item:focus-within .sub-menu {
-  visibility: visible;
-  opacity: 1;
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--text-color, #333);
+  border-radius: 2px;
+  transition: all 0.3s ease;
 }
+
+/* ===== TABLETTE ===== */
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 15px 20px;
+  }
   
-*/
-
-@media (min-width: 768px) {
-  .navbar ul .nav-item .sub-menu {
-    right: 15%;
+  .nav-menu {
+    gap: 30px;
+  }
+  
+  .nav-center {
+    gap: 15px;
   }
 }
 
-@media (min-width: 1440px) {
-  .navbar ul .nav-item .sub-menu {
-    width: 1440;
-    height: 1024;
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 12px 15px;
+  }
+  
+  .nav-left h1 {
+    font-size: 16px;
+  }
+  
+  .menu-toggle {
+    display: flex;
+  }
+  
+  /* Menu caché par défaut */
+  .nav-menu {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    right: 15px;
+    background-color: var(--white, #fff);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 20px;
+    flex-direction: column;
+    gap: 15px;
+    min-width: 250px;
+    z-index: 1000;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  /* Menu visible quand actif */
+  .nav-menu.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .nav-center,
+  .nav-right {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  
+  .nav-center a,
+  .nav-right button {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  .nav-right {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 15px;
+  }
+}
+
+/* ===== PETIT MOBILE ===== */
+@media (max-width: 480px) {
+  .navbar {
+    padding: 10px;
+  }
+  
+  .nav-left h1 {
+    font-size: 14px;
+  }
+  
+  .nav-menu {
+    right: 5px;
+    left: 5px;
+    min-width: auto;
+    width: calc(100% - 10px);
+    padding: 15px;
+  }
+  
+  .nav-center a,
+  .nav-right button {
+    font-size: 14px;
+    padding: 8px;
+  }
+  
+  .nav-avatar {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .menu-toggle span {
+    width: 22px;
   }
 }
