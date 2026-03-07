@@ -6,7 +6,8 @@
 import React from "react";
 import ProfileMain from "./components/ProfilePageComponents/ProfileMain";
 import "./App.css";
-import { Header } from "./components/Header";
+import { AuthentificationPage } from "./pages/AuthenticationPage";
+import { Route, Routes } from "react-router";
 
 const App: React.FC = () => {
   // ID de l'utilisateur à afficher
@@ -14,26 +15,10 @@ const App: React.FC = () => {
   const userId = 3; // Affiche Ada lovelace
 
   return (
-    
-    <div className="app">
-      <Header/>
-      {/* Contenu principal */}
-      <ProfileMain userId={userId} />
-
-      {/* Footer (à créer plus tard) */}
-      <footer className="app-footer">
-        <div className="app-footer__content">
-          <div className="footer-links">
-            <a href="#about">À Propos de Nous</a>
-            <a href="#contact">Contact</a>
-            <a href="#faq">FAQ</a>
-          </div>
-          <p className="footer-copyright">
-            ©2026 Troc-SkillHub. Tous droits réservés
-          </p>
-        </div>
-      </footer>
-    </div>
+    <Routes>
+      <Route path="/" element={<ProfileMain userId={userId} />} />
+      <Route path="/login" element={<AuthentificationPage />} />
+    </Routes>
   );
 };
 
