@@ -1,9 +1,9 @@
 import React from "react";
-import ProfileMain from "./components/ProfilePageComponents/ProfileMain";
-import "./App.css";
-import { Header } from "./components/commons/Header";
+import ProfileMain from "../components/ProfilePageComponents/ProfileMain";
+import "../App.css";
+import { Header } from "../components/commons/Header";
 
-const App: React.FC = () => {
+const ProfilPage: React.FC = () => {
   // ID de l'utilisateur à afficher
   // - L'authentification (utilisateur connecté)
   const userId = 3; // Affiche Ada lovelace
@@ -11,8 +11,8 @@ const App: React.FC = () => {
   return (
     <div className="app">
       <Header />
-      {/* Contenu principal */}
-      <ProfileMain userId={userId} />
+      {/*Contenu principal */}
+      {<ProfileMain userId={userId} />}
 
       {/* Footer (à créer plus tard) */}
       <footer className="app-footer">
@@ -31,4 +31,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default ProfilPage;

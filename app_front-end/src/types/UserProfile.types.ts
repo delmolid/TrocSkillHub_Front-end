@@ -3,6 +3,8 @@
  * Définition des types pour le profil utilisateur
  */
 
+import ProfilPage from "../pages/ProfilPage";
+
 // Type correspondant à la structure de l'API backend
 export interface ApiUser {
   id: number;
@@ -34,4 +36,8 @@ export interface UserProfile extends UserCardData {
   formations: string;
   experiences: string;
   projets: string;
+}
+
+export interface ProfilPageProps {
+  userID: number;
 }

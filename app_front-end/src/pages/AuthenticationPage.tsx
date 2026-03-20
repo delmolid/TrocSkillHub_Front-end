@@ -4,7 +4,7 @@ import { Header } from "../components/commons/Header";
 export const AuthentificationPage: React.FC = () => {
   return (
     <>
-      <div className="app">
+      <div>
         <Header />
         <AuthentificationForm />
       </div>

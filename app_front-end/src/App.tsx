@@ -4,7 +4,8 @@
  */
 
 import React from "react";
-import ProfileMain from "./components/ProfilePageComponents/ProfileMain";
+import ProfilPage from "./pages/ProfilPage";
+// import { ProfilPageProps } from "./types/UserProfile.types";
 import "./App.css";
 import { AuthentificationPage } from "./pages/AuthenticationPage";
 import { Route, Routes } from "react-router";
@@ -16,7 +17,7 @@ const App: React.FC = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<ProfileMain userId={userId} />} />
+      <Route path="/" element={<ProfilPage />} />
       <Route path="/login" element={<AuthentificationPage />} />
     </Routes>
   );
