@@ -15,6 +15,8 @@ export const register = async (data: {
   prenom: string;
   email: string;
   password: string;
+  city: string;
+  country: string;
 }): Promise<{ message: string }> => {
   try {
     const response = await fetch(`${API_BASE_URL}/register`, {
@@ -103,6 +105,8 @@ export const getCurrentUser = async (): Promise<{
   firstName: string;
   lastName: string;
   email: string;
+  city: string;
+  country: string;
 }> => {
   try {
     const response = await fetch(`${API_BASE_URL}/me`, {

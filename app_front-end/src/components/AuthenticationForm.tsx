@@ -15,6 +15,72 @@ type RegisterFields = {
   email: string;
   password: string;
   confirmPassword: string;
+  city: string;
+  country: string;
+};
+
+// Liste des pays et leurs villes
+const COUNTRIES_CITIES: Record<string, string[]> = {
+  France: [
+    "Paris",
+    "Marseille",
+    "Lyon",
+    "Toulouse",
+    "Nice",
+    "Nantes",
+    "Strasbourg",
+    "Montpellier",
+    "Bordeaux",
+    "Lille",
+  ].sort(),
+  Espagne: [
+    "Madrid",
+    "Barcelone",
+    "Valence",
+    "Séville",
+    "Saragosse",
+    "Malaga",
+    "Murcie",
+    "Palma de Majorque",
+    "Las Palmas",
+    "Bilbao",
+  ].sort(),
+  Canada: [
+    "Toronto",
+    "Montreal",
+    "Vancouver",
+    "Calgary",
+    "Edmonton",
+    "Ottawa",
+    "Winnipeg",
+    "Quebec",
+    "Hamilton",
+    "Kitchener",
+  ].sort(),
+  Djibouti: [
+    "Djibouti",
+    "Ali Sabieh",
+    "Tadjoura",
+    "Obock",
+    "Dikhil",
+    "Arta",
+    "Holhol",
+    "Loyada",
+    "Balho",
+    "Yoboki",
+  ].sort(),
+  Algérie: [
+    "Alger",
+    "Oran",
+    "Constantine",
+    "Annaba",
+    "Blida",
+    "Batna",
+    "Djelfa",
+    "Sétif",
+    "Sidi Bel Abbès",
+    "Biskra",
+  ].sort(),
 };
 
 export const AuthentificationForm: React.FC = () => {
@@ -22,6 +88,7 @@ export const AuthentificationForm: React.FC = () => {
   const [loginMessage, setLoginMessage] = useState("");
   const [signupMessage, setSignupMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedCountry, setSelectedCountry] = useState<string>("");
 
   const {
     register: registerLogin,
@@ -34,8 +101,14 @@ export const AuthentificationForm: React.FC = () => {
     handleSubmit: handleSignup,
     watch,
     reset: resetSignup,
+    setValue,
     formState: { errors: signupErrors },
-  } = useForm<RegisterFields>();
+  } = useForm<RegisterFields>({
+    defaultValues: {
+      country: "",
+      city: "",
+    },
+  });
 
   // CONNEXION
   const onLogin = async (data: LoginFields) => {
@@ -46,7 +119,6 @@ export const AuthentificationForm: React.FC = () => {
       const response = await loginUser(data);
       setLoginMessage(response.message);
       
-      // Redirection après connexion réussie
       setTimeout(() => {
         navigate("/profile-2");
       }, 1500);
@@ -68,10 +140,13 @@ export const AuthentificationForm: React.FC = () => {
         prenom: data.prenom,
         email: data.email,
         password: data.password,
+        city: data.city,
+        country: data.country,
       });
       
       setSignupMessage(response.message);
       resetSignup();
+      setSelectedCountry("");
 
       // Connexion automatique après inscription
       setTimeout(async () => {
@@ -86,6 +161,14 @@ export const AuthentificationForm: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Gestion du changement de pays
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const country = e.target.value;
+    setSelectedCountry(country);
+    setValue("country", country);
+    setValue("city", ""); // Réinitialise la ville quand le pays change
   };
 
   const password = watch("password");
@@ -148,6 +231,45 @@ export const AuthentificationForm: React.FC = () => {
           {signupErrors.email && (
             <p className="auth-error">{signupErrors.email.message}</p>
           )}
+
+          {/* CHAMPS PAYS ET VILLE */}
+          <div className="input-row">
+            <div className="input-group">
+              <label>Pays</label>
+              <select
+                {...registerSignup("country", { required: "Le pays est requis" })}
+                onChange={handleCountryChange}
+                value={selectedCountry}
+              >
+                <option value="">Pays</option>
+                {Object.keys(COUNTRIES_CITIES).map((country) => (
+                  <option key={country} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+              {signupErrors.country && (
+                <p className="auth-error">{signupErrors.country.message}</p>
+              )}
+            </div>
+            <div className="input-group">
+              <label>Ville</label>
+              <select
+                {...registerSignup("city", { required: "La ville est requise" })}
+                disabled={!selectedCountry}
+              >
+                <option value="">Ville</option>
+                {selectedCountry && COUNTRIES_CITIES[selectedCountry]?.map((city) => (
+                  <option key={city} value={city}>
+                    {city}
+                  </option>
+                ))}
+              </select>
+              {signupErrors.city && (
+                <p className="auth-error">{signupErrors.city.message}</p>
+              )}
+            </div>
+          </div>
 
           <label>Mot de passe</label>
           <input
