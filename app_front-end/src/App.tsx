@@ -1,24 +1,23 @@
 /**
  * App.tsx
- * Exemple d'utilisation du composant ProfileMain
+ * Routes principales de l'application
  */
 
 import React from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import ProfilPage from "./pages/ProfilPage";
-// import { ProfilPageProps } from "./types/UserProfile.types";
-import "./App.css";
 import { AuthentificationPage } from "./pages/AuthenticationPage";
-import { Route, Routes } from "react-router";
+import "./App.css";
 
 const App: React.FC = () => {
-  // ID de l'utilisateur à afficher
-  // - L'authentification (utilisateur connecté)
-  const userId = 3; // Affiche Ada lovelace
-
   return (
     <Routes>
       <Route path="/" element={<ProfilPage />} />
       <Route path="/login" element={<AuthentificationPage />} />
+      <Route path="/profile" element={<ProfilPage />} />
+      
+      {/* Redirection par défaut si route inconnue */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

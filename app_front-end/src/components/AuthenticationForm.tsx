@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register as registerUser, login as loginUser } from "../services/authService";
 import "./AuthenticationForm.css";
 
 type LoginFields = {
@@ -15,6 +18,11 @@ type RegisterFields = {
 };
 
 export const AuthentificationForm: React.FC = () => {
+  const navigate = useNavigate();
+  const [loginMessage, setLoginMessage] = useState("");
+  const [signupMessage, setSignupMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     register: registerLogin,
     handleSubmit: handleLogin,
@@ -25,23 +33,79 @@ export const AuthentificationForm: React.FC = () => {
     register: registerSignup,
     handleSubmit: handleSignup,
     watch,
+    reset: resetSignup,
     formState: { errors: signupErrors },
   } = useForm<RegisterFields>();
 
-  const onLogin = handleLogin((data) => console.log("Login:", data));
-  const onSignup = handleSignup((data) => console.log("Signup:", data));
+  // CONNEXION
+  const onLogin = async (data: LoginFields) => {
+    setIsLoading(true);
+    setLoginMessage("");
+
+    try {
+      const response = await loginUser(data);
+      setLoginMessage(response.message);
+      
+      // Redirection après connexion réussie
+      setTimeout(() => {
+        navigate("/profile");
+      }, 1500);
+    } catch (error: any) {
+      setLoginMessage(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // INSCRIPTION
+  const onSignup = async (data: RegisterFields) => {
+    setIsLoading(true);
+    setSignupMessage("");
+
+    try {
+      const response = await registerUser({
+        nom: data.nom,
+        prenom: data.prenom,
+        email: data.email,
+        password: data.password,
+      });
+      
+      setSignupMessage(response.message);
+      resetSignup();
+
+      // Connexion automatique après inscription
+      setTimeout(async () => {
+        await loginUser({
+          email: data.email,
+          password: data.password,
+        });
+        navigate("/profile"); 
+      }, 1500);
+    } catch (error: any) {
+      setSignupMessage(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const password = watch("password");
 
   return (
     <div className="page-container">
-      {/* Formulaire d'inscription — gauche */}
+      {/* FORMULAIRE D'INSCRIPTION */}
       <div className="panel panel-left">
         <p className="form-title">NOUVEAU CLIENT ? INSCRIVEZ-VOUS</p>
         <p className="form-subtitle">
           Créez votre compte en quelques secondes.
         </p>
-        <form className="register-form" onSubmit={onSignup}>
+        
+        {signupMessage && (
+          <p className={signupMessage.includes("réussie") ? "success-message" : "auth-error"}>
+            {signupMessage}
+          </p>
+        )}
+
+        <form className="register-form" onSubmit={handleSignup(onSignup)}>
           <div className="input-row">
             <div className="input-group">
               <label>Nom</label>
@@ -91,7 +155,18 @@ export const AuthentificationForm: React.FC = () => {
               required: "Le mot de passe est requis",
               minLength: {
                 value: 8,
-                message: "Minimum 8 caractères",
+                message: "Le mot de passe doit contenir au moins 8 caractères",
+              },
+              validate: {
+                hasUpperCase: (value) =>
+                  /[A-Z]/.test(value) || "Le mot de passe doit contenir au moins une majuscule",
+                hasLowerCase: (value) =>
+                  /[a-z]/.test(value) || "Le mot de passe doit contenir au moins une minuscule",
+                hasNumber: (value) =>
+                  /[0-9]/.test(value) || "Le mot de passe doit contenir au moins un chiffre",
+                hasSpecialChar: (value) =>
+                  /[@#$%^&+=!?*]/.test(value) ||
+                  "Le mot de passe doit contenir au moins un caractère spécial (@#$%^&+=!?*)",
               },
             })}
             placeholder="Votre mot de passe"
@@ -115,24 +190,33 @@ export const AuthentificationForm: React.FC = () => {
             <p className="auth-error">{signupErrors.confirmPassword.message}</p>
           )}
 
-          <button type="submit">Créer mon compte</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Chargement..." : "Créer mon compte"}
+          </button>
         </form>
       </div>
 
-      {/* Séparateur vertical */}
+      {/* SÉPARATEUR */}
       <div className="divider">
         <div className="divider-line" />
         <span className="divider-label">ou</span>
         <div className="divider-line" />
       </div>
 
-      {/* Formulaire de connexion — droite */}
+      {/* FORMULAIRE DE CONNEXION */}
       <div className="panel panel-right">
         <p className="form-title">DÉJÀ CLIENT ? CONNECTEZ-VOUS</p>
         <p className="form-subtitle">
           Connectez-vous avec votre adresse mail et votre mot de passe.
         </p>
-        <form className="login-form" onSubmit={onLogin}>
+
+        {loginMessage && (
+          <p className={loginMessage.includes("réussie") ? "success-message" : "auth-error"}>
+            {loginMessage}
+          </p>
+        )}
+
+        <form className="login-form" onSubmit={handleLogin(onLogin)}>
           <label>Email</label>
           <input
             {...registerLogin("email", {
@@ -157,7 +241,9 @@ export const AuthentificationForm: React.FC = () => {
             <p className="auth-error">{loginErrors.password.message}</p>
           )}
 
-          <button type="submit">Se connecter</button>
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "Connexion..." : "Se connecter"}
+          </button>
         </form>
       </div>
     </div>

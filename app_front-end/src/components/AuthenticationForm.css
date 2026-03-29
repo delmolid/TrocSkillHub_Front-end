@@ -134,6 +134,23 @@
 }
 
 /* ───────────────────────────────────────────
+   MESSAGES DE SUCCÈS
+─────────────────────────────────────────── */
+.success-message {
+  color: #22c55e !important;
+  background-color: #f0fdf4 !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  margin: 0.5rem 0 !important;
+  padding: 0.75rem 1rem !important;
+  border: 1px solid #86efac !important;
+  border-radius: 10px !important;
+  display: block !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* ───────────────────────────────────────────
    REGISTRATION — ROW NOM / PRÉNOM
 ─────────────────────────────────────────── */
 .input-row {
