@@ -1,0 +1,273 @@
+/**
+ * ProfileMain2.css
+ * Styles pour le composant ProfileMain2 (nouveau utilisateur)
+ */
+
+/* Import des styles de base */
+@import './ProfileMain.css';
+
+/* ===== BANNIÈRE DE BIENVENUE ===== */
+.welcome-banner {
+  background: linear-gradient(135deg, #008B8B 0%, #00A5A5 100%);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 139, 139, 0.2);
+  color: white;
+  margin-bottom: 10px;
+}
+
+.welcome-banner__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.welcome-banner__text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* ===== SECTIONS INCOMPLÈTES ===== */
+.incomplete-section {
+  position: relative;
+  opacity: 0.95;
+}
+
+.incomplete-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #FFA726 0%, #FF9800 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+/* ===== ÉTATS VIDES ===== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #F9FAFB;
+  border-radius: 8px;
+  border: 2px dashed #D1D5DB;
+  min-height: 180px;
+}
+
+.empty-state__icon {
+  font-size: 48px;
+  margin-bottom: 15px;
+  display: block;
+}
+
+.empty-state__text {
+  font-size: 14px;
+  color: #6B7280;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  max-width: 400px;
+}
+
+/* ===== BOUTONS DE COMPLÉTION ===== */
+.complete-button {
+  padding: 12px 24px;
+  background-color: #008B8B;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 139, 139, 0.2);
+}
+
+.complete-button:hover {
+  background-color: #006666;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 139, 139, 0.3);
+}
+
+.complete-button:active {
+  transform: translateY(0);
+}
+
+.complete-button--small {
+  padding: 10px 20px;
+  font-size: 13px;
+}
+
+/* ===== INDICATEUR DE PROGRESSION ===== */
+.profile-completion {
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+  padding: 25px;
+  border-radius: 12px;
+  border: 2px solid #FFB74D;
+  margin-top: 10px;
+}
+
+.profile-completion__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.profile-completion__title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.profile-completion__percentage {
+  font-size: 20px;
+  font-weight: 700;
+  color: #FF9800;
+}
+
+.profile-completion__bar {
+  width: 100%;
+  height: 12px;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.profile-completion__progress {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+.profile-completion__hint {
+  font-size: 13px;
+  color: #F57C00;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ===== AJUSTEMENTS POUR SECTIONS VIDES ===== */
+.section-card.incomplete-section,
+.info-section.incomplete-section {
+  background-color: white;
+}
+
+/* Empty state dans les petites cards */
+.section-card .empty-state {
+  padding: 30px 15px;
+  min-height: 150px;
+}
+
+.section-card .empty-state__icon {
+  font-size: 36px;
+}
+
+.section-card .empty-state__text {
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Tablette */
+@media (max-width: 1024px) {
+  .welcome-banner {
+    padding: 25px;
+  }
+
+  .welcome-banner__title {
+    font-size: 20px;
+  }
+
+  .welcome-banner__text {
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .welcome-banner {
+    padding: 20px;
+  }
+
+  .welcome-banner__title {
+    font-size: 18px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .welcome-banner__text {
+    font-size: 13px;
+  }
+
+  .empty-state {
+    padding: 30px 15px;
+    min-height: 150px;
+  }
+
+  .empty-state__icon {
+    font-size: 40px;
+  }
+
+  .empty-state__text {
+    font-size: 13px;
+  }
+
+  .profile-completion {
+    padding: 20px;
+  }
+
+  .profile-completion__title {
+    font-size: 14px;
+  }
+
+  .profile-completion__percentage {
+    font-size: 18px;
+  }
+}
+
+/* Petit mobile */
+@media (max-width: 480px) {
+  .welcome-banner {
+    padding: 15px;
+  }
+
+  .welcome-banner__title {
+    font-size: 16px;
+  }
+
+  .welcome-banner__text {
+    font-size: 12px;
+  }
+
+  .empty-state {
+    padding: 25px 10px;
+  }
+
+  .empty-state__icon {
+    font-size: 36px;
+  }
+
+  .complete-button {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .complete-button--small {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+}

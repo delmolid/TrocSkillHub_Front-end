@@ -48,7 +48,7 @@ export const AuthentificationForm: React.FC = () => {
       
       // Redirection après connexion réussie
       setTimeout(() => {
-        navigate("/profile");
+        navigate("/profile-2");
       }, 1500);
     } catch (error: any) {
       setLoginMessage(error.message);
@@ -79,7 +79,7 @@ export const AuthentificationForm: React.FC = () => {
           email: data.email,
           password: data.password,
         });
-        navigate("/profile"); 
+        navigate("/profile-2"); 
       }, 1500);
     } catch (error: any) {
       setSignupMessage(error.message);
