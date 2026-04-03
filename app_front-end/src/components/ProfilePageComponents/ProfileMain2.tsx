@@ -187,13 +187,7 @@ const ProfileMain2: React.FC<ProfileMain2Props> = ({ userId }) => {
           </div>
         </section>
       </div>
-
-      {/* Bouton pour recharger les données (optionnel - pour debug) */}
-      {process.env.NODE_ENV === 'development' && (
-        <button onClick={refetch} className="debug-reload">
-          🔄 Recharger
-        </button>
-      )}
+      
     </main>
   );
 };
