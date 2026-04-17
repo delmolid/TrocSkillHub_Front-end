@@ -4,11 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-test: {
-  coverage: {
-    provider: 'v8',
-    reporter: ['html'],
-    reportsDirectory: 'coverage'
-  }
-}
+  test: {
+    environment: "jsdom",
+  },
 })

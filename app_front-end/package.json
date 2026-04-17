@@ -9,8 +9,7 @@
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "preview": "vite preview",
     "type-check": "tsc --noEmit",
-    "test": "vitest", 
-    "test:coverage": "vitest run --coverage"
+    "test": "vitest"
   },
   "dependencies": {
     "react": "^19.2.0",
