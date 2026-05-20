@@ -5,7 +5,7 @@
 
 import { ApiUser } from '../types/UserProfile.types';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'http://localhost:8099/api';
 
 /**
  * Récupère tous les utilisateurs
@@ -13,7 +13,12 @@ const API_BASE_URL = 'http://localhost:8080/api';
  */
 export const getAllUsers = async (): Promise<ApiUser[]> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/users`);
+    const response = await fetch(`${API_BASE_URL}/users`, 
+      {
+        credentials: 'include'
+     }
+
+    );
     
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);
@@ -34,7 +39,11 @@ export const getAllUsers = async (): Promise<ApiUser[]> => {
  */
 export const getUserById = async (userId: number): Promise<ApiUser> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/users/${userId}`);
+    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+       credentials: 'include'
+    }
+
+    );
     
     if (!response.ok) {
       throw new Error(`Erreur HTTP: ${response.status}`);

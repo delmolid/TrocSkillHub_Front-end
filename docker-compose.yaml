@@ -6,3 +6,4 @@ services:
     image: trocskillhub-frontend
     ports:
       - "5173:8080"
+
