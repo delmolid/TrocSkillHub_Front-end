@@ -1,5 +1,5 @@
-import "../styles/Header.css";
-import reactLogo from "../assets/Ada_Lovelace.jpg";
+import "../../styles/Header.css";
+import reactLogo from "../../assets/Ada_Lovelace.jpg";
 import { useState } from "react";
 
 export const Header: React.FC = () => {
