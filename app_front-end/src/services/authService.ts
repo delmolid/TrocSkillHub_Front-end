@@ -3,7 +3,16 @@
  * Service pour gérer l'authentification (inscription, connexion, déconnexion)
  */
 
-const API_BASE_URL = 'http://localhost:8099/api/auth';
+const API_BASE_URL = 'http://localhost:8080/api/auth';
+
+export interface CurrentUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  city: string;
+  country: string;
+}
 
 /**
  * Inscrit un nouvel utilisateur
@@ -100,14 +109,7 @@ export const logout = async (): Promise<{ message: string }> => {
  * Récupère les informations de l'utilisateur connecté
  * @returns Promise avec les infos de l'utilisateur
  */
-export const getCurrentUser = async (): Promise<{
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  city: string;
-  country: string;
-}> => {
+export const getCurrentUser = async (): Promise<CurrentUser> => {
   try {
     const response = await fetch(`${API_BASE_URL}/me`, {
       method: 'GET',

@@ -1,24 +1,69 @@
 /**
  * types/UserProfile.ts
- * Définition des types pour le profil utilisateur
+ * Définition des types pour le profil utilisateur (alignés sur l'API /users/:id)
  */
 
-import ProfilPage from "../pages/ProfilPage";
+export interface EducationItem {
+  name?: string;
+  school?: string;
+  dateStart?: string;
+  dateEnd?: string;
+}
 
-// Type correspondant à la structure de l'API backend
+export interface ExperienceItem {
+  job?: string;
+  company?: string;
+  dateStart?: string;
+  dateEnd?: string;
+}
+
+export interface ProjectItem {
+  name?: string;
+  description?: string;
+  links?: string;
+  dateStart?: string;
+  dateEnd?: string;
+}
+
+export type ProfileSectionData =
+  | string
+  | EducationItem
+  | ExperienceItem
+  | ProjectItem
+  | EducationItem[]
+  | ExperienceItem[]
+  | ProjectItem[]
+  | null;
+
 export interface ApiUser {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   email: string;
-  address: string;
+  address?: string | null;
   city: string;
   country: string;
-  phoneNumber: string;
-  description: string;
+  phoneNumber: string | null;
+  description: string | null;
+  skills: skills[];
+  needs: needs[];
+  education: ProfileSectionData;
+  experience: ProfileSectionData;
+  project: ProfileSectionData;
 }
 
-// Type pour le composant UserCard
+export interface skills {
+  knowledgeName?: string;
+  level?: string;
+  type?: string;
+}
+
+export interface needs {
+  knowledgeName?: string;
+  level?: string;
+  type?: string;
+}
+
 export interface UserCardData {
   photo: string;
   prenom: string;
@@ -28,7 +73,6 @@ export interface UserCardData {
   instagram?: string;
 }
 
-// Type complet du profil utilisateur (pour extension future)
 export interface UserProfile extends UserCardData {
   about: string;
   competences: string[];
