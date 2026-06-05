@@ -1,58 +1,38 @@
-/**
- * services/userService.ts
- * Service pour gérer les appels API liés aux utilisateurs
- */
-
 import { ApiUser } from '../types/UserProfile.types';
 
-const API_BASE_URL = 'http://localhost:8099/api';
+const API_BASE_URL = 'http://localhost:8080/api';
 
-/**
- * Récupère tous les utilisateurs
- * @returns Promise<ApiUser[]>
- */
+const normalizeUser = (user: ApiUser): ApiUser => ({
+  ...user,
+  skills: user.skills ?? [],
+  needs: user.needs ?? [],
+  education: user.education ?? null,
+  experience: user.experience ?? null,
+  project: user.project ?? null,
+});
+
 export const getAllUsers = async (): Promise<ApiUser[]> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/users`, 
-      {
-        credentials: 'include'
-     }
+  const response = await fetch(`${API_BASE_URL}/users`, {
+    credentials: "include",
+  });
 
-    );
-    
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    
-    const data: ApiUser[] = await response.json();
-    return data;
-  } catch (error) {
-    console.error('Erreur lors de la récupération des utilisateurs:', error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP: ${response.status}`);
   }
+
+  const data: ApiUser[] = await response.json();
+  return data.map(normalizeUser);
 };
 
-/**
- * Récupère un utilisateur par son ID
- * @param userId - L'ID de l'utilisateur
- * @returns Promise<ApiUser>
- */
 export const getUserById = async (userId: number): Promise<ApiUser> => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
-       credentials: 'include'
-    }
+  const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+    credentials: "include",
+  });
 
-    );
-    
-    if (!response.ok) {
-      throw new Error(`Erreur HTTP: ${response.status}`);
-    }
-    
-    const data: ApiUser = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Erreur lors de la récupération de l'utilisateur ${userId}:`, error);
-    throw error;
+  if (!response.ok) {
+    throw new Error(`Erreur HTTP: ${response.status}`);
   }
+
+  const data: ApiUser = await response.json();
+  return normalizeUser(data);
 };

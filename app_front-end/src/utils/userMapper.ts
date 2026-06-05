@@ -35,7 +35,7 @@ export const mapApiUserToUserCard = (apiUser: ApiUser): UserCardData => {
  * @returns string - Description de l'utilisateur
  */
 export const getUserDescription = (apiUser: ApiUser): string => {
-  return apiUser.description || '';
+  return apiUser.description ?? '';
 };
 
 /**

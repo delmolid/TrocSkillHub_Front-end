@@ -6,9 +6,13 @@
 /* ===== RESET ET BASE ===== */
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
+
+/* Ne pas annuler le padding des champs de formulaire (shadcn / Tailwind) */
+/* *:not(input):not(textarea):not(select):not(button) {
+  padding: 0;
+} */ */
 
 :root {
   --color-primary: #176B87;
