@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const backendUrl = env.VITE_API_PROXY_TARGET
 
-  if (!backendUrl) {
+  if (mode === 'development' && !backendUrl) {
     throw new Error('VITE_API_PROXY_TARGET must be defined in .env')
   }
 
@@ -19,14 +19,18 @@ export default defineConfig(({ mode }) => {
         '@': path.resolve(__dirname, './src'),
       },
     },
-    server: {
-      proxy: {
-        '/api': {
-          target: backendUrl,
-          changeOrigin: true,
-        },
-      },
-    },
+    ...(mode === 'development' && backendUrl
+      ? {
+          server: {
+            proxy: {
+              '/api': {
+                target: backendUrl,
+                changeOrigin: true,
+              },
+            },
+          },
+        }
+      : {}),
     test: {
       environment: "jsdom",
     },
