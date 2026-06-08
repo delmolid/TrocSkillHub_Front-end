@@ -9,7 +9,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-/** Normalise education | experience | project (null, objet, tableau ou texte) en liste */
+/** Normalizes education | experience | project (null, object, array, or string) into a list. */
 export function toSectionItems<T extends object>(
   data: ProfileSectionData,
 ): T[] {

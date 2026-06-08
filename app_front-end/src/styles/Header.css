@@ -1,4 +1,4 @@
-/* ===== STYLES PAR DÉFAUT (Desktop) ===== */
+/* ===== DEFAULT STYLES (Desktop) ===== */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -56,7 +56,7 @@
   transition: all 0.3s ease;
 }
 
-/* ===== TABLETTE ===== */
+/* ===== TABLET ===== */
 @media (max-width: 1024px) {
   .navbar {
     padding: 15px 20px;
@@ -82,7 +82,7 @@
     display: flex;
   }
   
-  /* Menu caché par défaut */
+  /* Menu hidden by default */
   .nav-menu {
     visibility: hidden;
     opacity: 0;
@@ -100,7 +100,7 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
   }
   
-  /* Menu visible quand actif */
+  /* Menu visible when active */
   .nav-menu.active {
     visibility: visible;
     opacity: 1;
@@ -126,7 +126,7 @@
   }
 }
 
-/* ===== PETIT MOBILE ===== */
+/* ===== SMALL MOBILE ===== */
 @media (max-width: 480px) {
   .navbar {
     padding: 10px;

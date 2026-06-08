@@ -2,20 +2,7 @@ import React from "react";
 import { RiPencilFill } from "react-icons/ri";
 import { Button } from "primereact/button";
 import { cn } from "@/lib/utils";
-
-interface EditableProfileCardProps {
-  isEditing: boolean;
-  isActive: boolean;
-  onEditClick: () => void;
-  onCancel: () => void;
-  onSave: () => void;
-  isSaving?: boolean;
-  editLabel?: string;
-  className?: string;
-  bordered?: boolean;
-  editContent: React.ReactNode;
-  children: React.ReactNode;
-}
+import type { EditableProfileCardProps } from "../../types/profile.types";
 
 const EditableProfileCard: React.FC<EditableProfileCardProps> = ({
   isEditing,

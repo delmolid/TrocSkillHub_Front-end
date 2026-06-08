@@ -2,14 +2,8 @@ import React, { useEffect, useId, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import { cn } from "@/lib/utils";
 import { useBanCommuneSearch } from "@/hooks/useBanCommuneSearch";
+import type { FranceCityAutocompleteProps } from "@/types/auth.types";
 import type { BanCommuneSuggestion } from "@/types/ban.types";
-
-type FranceCityAutocompleteProps = {
-  value: string;
-  onChange: (city: string) => void;
-  onBlur?: () => void;
-  disabled?: boolean;
-};
 
 export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
   value,

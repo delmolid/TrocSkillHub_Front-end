@@ -1,15 +1,10 @@
-/**
- * App.css
- * Styles globaux pour l'application TROC-SKILLHUB
- */
-
-/* ===== RESET ET BASE ===== */
+/* ===== RESET AND BASE ===== */
 * {
   margin: 0;
   box-sizing: border-box;
 }
 
-/* Ne pas annuler le padding des champs de formulaire (shadcn / Tailwind) */
+/* Do not reset form field padding (shadcn / Tailwind) */
 /* *:not(input):not(textarea):not(select):not(button) {
   padding: 0;
 } */ */
@@ -87,7 +82,7 @@ body {
   margin: 0;
 }
 
-/* ===== ANIMATIONS UTILES ===== */
+/* ===== UTILITY ANIMATIONS ===== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -112,7 +107,7 @@ body {
   }
 }
 
-/* ===== UTILITAIRES ===== */
+/* ===== UTILITIES ===== */
 .container {
   max-width: 1400px;
   margin: 0 auto;
@@ -155,7 +150,7 @@ body {
 }
 
 
-/* ===== ACCESSIBILITÉ ===== */
+/* ===== ACCESSIBILITY ===== */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -166,7 +161,7 @@ body {
   }
 }
 
-/* Focus visible pour la navigation au clavier */
+/* Focus visible for keyboard navigation */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid #008B8B;

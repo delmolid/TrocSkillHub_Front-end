@@ -3,27 +3,8 @@ import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
+import type { ProfileItemsEditorProps } from "../../types/profile.types";
 import { formatIsoDate, parseIsoDate } from "../../utils/dateHelpers";
-
-type FieldType = "text" | "textarea" | "date";
-
-export type ProfileItemField<T> = {
-  key: keyof T;
-  label: string;
-  type?: FieldType;
-  placeholder?: string;
-  halfWidth?: boolean;
-};
-
-interface ProfileItemsEditorProps<T extends object> {
-  id: string;
-  label: string;
-  items: T[];
-  fields: ProfileItemField<T>[];
-  createEmpty: () => T;
-  itemTitle: (index: number) => string;
-  onChange: (items: T[]) => void;
-}
 
 function ProfileItemsEditor<T extends object>({
   id,

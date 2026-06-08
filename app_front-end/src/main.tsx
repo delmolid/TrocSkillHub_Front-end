@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { PrimeReactProvider } from "primereact/api";
 import App from "./App";
 import { queryClient } from "./hooks/useUserQuery";
@@ -27,7 +26,7 @@ ReactDOM.createRoot(rootElement).render(
             <App />
           </BrowserRouter>
         </AuthProvider>
-        {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+        {import.meta.env.DEV}
       </QueryClientProvider>
     </PrimeReactProvider>
   </React.StrictMode>,

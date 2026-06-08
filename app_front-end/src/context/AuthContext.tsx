@@ -4,15 +4,8 @@ import React, {
   type ReactNode,
 } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getCurrentUser, type CurrentUser } from "../services/authService";
-
-interface AuthContextValue {
-  user: CurrentUser | undefined;
-  userId: number | undefined;
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
-}
+import { getCurrentUser } from "../services/authService";
+import type { AuthContextValue } from "../types/auth.types";
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
@@ -36,7 +29,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 }
 
-/** Hook d'accès au contexte auth (useContext) */
 export function useAuth(): AuthContextValue {
   const context = useContext(AuthContext);
   if (!context) {

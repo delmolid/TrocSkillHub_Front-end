@@ -5,7 +5,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { getUserById, updateProfilUser } from "../services/userService";
-import type { UpdateProfilUserPayload } from "../types/UserProfile.types";
+import type { UpdateProfilUserVariables } from "../types/auth.types";
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,11 +23,6 @@ export function useUserQuery(userId: number) {
     queryFn: () => getUserById(userId),
     enabled: userId > 0,
   });
-}
-
-interface UpdateProfilUserVariables {
-  userId: number;
-  data: UpdateProfilUserPayload;
 }
 
 export function useUpdateProfilUser() {

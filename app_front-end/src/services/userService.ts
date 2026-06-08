@@ -1,13 +1,11 @@
+import { API_USERS_URL } from '../constantes';
 import {
   ApiUser,
   type needs,
+  type RawKnowledgeItem,
   type skills,
   type UpdateProfilUserPayload,
 } from '../types/UserProfile.types';
-
-const API_BASE_URL = 'http://localhost:8099/api';
-
-type RawKnowledgeItem = (skills | needs) & { id?: number };
 
 const normalizeKnowledgeItem = (item: RawKnowledgeItem): skills | needs => ({
   knowledgeId: item.knowledgeId ?? item.id,
@@ -26,7 +24,7 @@ const normalizeUser = (user: ApiUser): ApiUser => ({
 });
 
 export const getAllUsers = async (): Promise<ApiUser[]> => {
-  const response = await fetch(`${API_BASE_URL}/users`, {
+  const response = await fetch(`${API_USERS_URL}`, {
     credentials: "include",
   });
 
@@ -39,7 +37,7 @@ export const getAllUsers = async (): Promise<ApiUser[]> => {
 };
 
 export const getUserById = async (userId: number): Promise<ApiUser> => {
-  const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+  const response = await fetch(`${API_USERS_URL}/${userId}`, {
     credentials: "include",
   });
 
@@ -55,7 +53,7 @@ export const updateProfilUser = async (
   userId: number,
   payload: UpdateProfilUserPayload,
 ): Promise<ApiUser> => {
-  const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+  const response = await fetch(`${API_USERS_URL}/${userId}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

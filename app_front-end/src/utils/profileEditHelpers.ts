@@ -25,7 +25,7 @@ function trimOptional(value?: string): string | undefined {
   return trimmed || undefined;
 }
 
-/** Normalise une date API vers le format attendu par input[type=date] (AAAA-MM-JJ). */
+/** Normalizes an API date to the format expected by input[type=date] (YYYY-MM-DD). */
 export function normalizeDateForInput(value?: string): string {
   if (!value?.trim()) return "";
 

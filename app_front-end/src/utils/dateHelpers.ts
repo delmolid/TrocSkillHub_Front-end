@@ -1,4 +1,4 @@
-/** Convertit une chaîne AAAA-MM-JJ en Date locale. */
+/** Parses a YYYY-MM-DD string into a local Date. */
 export function parseIsoDate(value?: string): Date | null {
   if (!value?.trim()) return null;
   const [year, month, day] = value.split("-").map(Number);
@@ -6,7 +6,7 @@ export function parseIsoDate(value?: string): Date | null {
   return new Date(year, month - 1, day);
 }
 
-/** Convertit une Date en chaîne AAAA-MM-JJ. */
+/** Formats a Date as a YYYY-MM-DD string. */
 export function formatIsoDate(date: Date | null | undefined): string {
   if (!date) return "";
   const year = date.getFullYear();

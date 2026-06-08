@@ -1,10 +1,9 @@
+import { BAN_API_URL } from "../constantes";
 import type {
   BanCommuneSuggestion,
   BanFeature,
   BanSearchResponse,
 } from "../types/ban.types";
-
-const BAN_API_URL = "https://api-adresse.data.gouv.fr/search";
 
 const normalizeCity = (value: string): string =>
   value
@@ -47,10 +46,7 @@ const dedupeSuggestions = (
   });
 };
 
-/**
- * API BAN (Base Adresse Nationale).
- * @see https://adresse.data.gouv.fr/api-doc/adresse
- */
+/** French National Address API (BAN). @see https://adresse.data.gouv.fr/api-doc/adresse */
 export const searchBanCommunes = async (
   query: string,
   limit = 12,

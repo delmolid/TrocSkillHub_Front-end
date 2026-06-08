@@ -20,7 +20,7 @@
   --ts-text-sm: 0.75rem;
   --ts-text-base: 1rem;
 
-  /* Boutons */
+  /* Buttons */
   --ts-btn-primary-bg: var(--ts-accent);
   --ts-btn-primary-hover: var(--ts-primary-green);
   --ts-btn-primary-active: #5a5e3f;
@@ -35,14 +35,14 @@
   --ts-btn-transition: background-color 0.2s ease, color 0.2s ease,
     border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
 
-  /* Boutons profil (Modifier, Enregistrer, Annuler) */
+  /* Profile buttons (Edit, Save, Cancel) */
   --ts-btn-profile-radius: 9999px;
   --ts-btn-profile-border: 1.5px;
   --ts-btn-profile-shadow: 0 1px 3px rgb(6 6 5 / 8%);
   --ts-btn-profile-shadow-hover: 0 4px 14px rgb(6 6 5 / 12%);
 }
 
-/* ── Variants boutons ── */
+/* ── Button variants ── */
 .p-button.ts-btn-primary {
   border: 1px solid var(--ts-btn-primary-bg);
   background: var(--ts-btn-primary-bg);
@@ -101,7 +101,7 @@
   box-shadow: 0 0 0 3px var(--ts-focus-ring);
 }
 
-/* Profil — Modifier / Enregistrer / Annuler */
+/* Profile — Edit / Save / Cancel */
 .p-button.ts-btn-profile {
   border-radius: var(--ts-btn-profile-radius);
   border-width: var(--ts-btn-profile-border);
@@ -203,7 +203,7 @@
   box-shadow: 0 0 0 3px var(--ts-focus-ring);
 }
 
-/* Typographie globale PrimeReact */
+/* Global PrimeReact typography */
 .p-component,
 .p-inputtext,
 .p-inputtextarea,
@@ -215,7 +215,7 @@
   color: var(--ts-text);
 }
 
-/* Auth form — palette & typo projet */
+/* Auth form — project palette and typography */
 .auth-form-panel {
   box-sizing: border-box;
   width: 380px;
@@ -340,7 +340,7 @@
   color: var(--ts-text);
 }
 
-/* Blocs formulaire profil (formation, expérience, projet) */
+/* Profile form blocks (education, experience, project) */
 .profile-form-block {
   background: var(--ts-form-block-bg);
   border: 1px solid rgb(23 107 135 / 20%);
@@ -355,7 +355,7 @@
   color: var(--ts-text);
 }
 
-/* ── Champs profil (édition) ── */
+/* ── Profile fields (edit mode) ── */
 .profile-field .p-inputtext,
 .profile-field .p-inputtextarea,
 .profile-field .p-dropdown,
@@ -428,7 +428,7 @@
   box-shadow: 0 0 0 3px var(--ts-focus-ring);
 }
 
-/* ── Liste déroulante (compétences / besoins) ── */
+/* ── Dropdown list (skills / needs) ── */
 .ts-dropdown-panel.p-dropdown-panel {
   font-family: var(--ts-font-body);
   font-size: var(--ts-text-sm);
@@ -479,7 +479,7 @@
   font-weight: 700;
 }
 
-/* ── Calendrier (dates profil) ── */
+/* ── Calendar (profile dates) ── */
 .ts-calendar-panel.p-datepicker {
   font-family: var(--ts-font-body);
   font-size: var(--ts-text-sm);

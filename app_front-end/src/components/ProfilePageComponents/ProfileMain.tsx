@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import UserCard from "./UserCard";
 import EditableProfileCard from "./EditableProfileCard";
 import KnowledgeListEditor from "./KnowledgeListEditor";
-import ProfileItemsEditor, {
-  type ProfileItemField,
-} from "./ProfileItemsEditor";
+import ProfileItemsEditor from "./ProfileItemsEditor";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
@@ -32,123 +30,22 @@ import {
   sanitizeExperienceItems,
   sanitizeProjectItems,
 } from "../../utils/profileEditHelpers";
+import {
+  EDUCATION_FIELDS,
+  EXPERIENCE_FIELDS,
+  PROJECT_FIELDS,
+} from "../../constantes";
 import type {
   EducationItem,
   ExperienceItem,
-  needs,
   ProjectItem,
-  skills,
 } from "../../types/UserProfile.types";
-
-interface ProfileMainProps {
-  userId: number;
-}
-
-type ProfileSectionKey =
-  | "identity"
-  | "about"
-  | "skills"
-  | "needs"
-  | "education"
-  | "experience"
-  | "projects";
-
-type IdentityForm = {
-  firstName: string;
-  lastName: string;
-  city: string;
-  country: string;
-};
-
-type SectionEditState =
-  | { section: "identity"; data: IdentityForm }
-  | { section: "about"; data: string }
-  | { section: "skills"; data: skills[] }
-  | { section: "needs"; data: needs[] }
-  | { section: "education"; data: EducationItem[] }
-  | { section: "experience"; data: ExperienceItem[] }
-  | { section: "projects"; data: ProjectItem[] };
-
-const EDUCATION_FIELDS: ProfileItemField<EducationItem>[] = [
-  {
-    key: "name",
-    label: "Titre de la formation",
-    placeholder: "Licence Informatique",
-  },
-  {
-    key: "school",
-    label: "Établissement",
-    placeholder: "Université Paris",
-  },
-  {
-    key: "dateStart",
-    label: "Date de début",
-    type: "date",
-    halfWidth: true,
-  },
-  {
-    key: "dateEnd",
-    label: "Date de fin",
-    type: "date",
-    halfWidth: true,
-  },
-];
-
-const EXPERIENCE_FIELDS: ProfileItemField<ExperienceItem>[] = [
-  {
-    key: "job",
-    label: "Poste",
-    placeholder: "Développeur Full Stack",
-  },
-  {
-    key: "company",
-    label: "Entreprise",
-    placeholder: "ACME",
-  },
-  {
-    key: "dateStart",
-    label: "Date de début",
-    type: "date",
-    halfWidth: true,
-  },
-  {
-    key: "dateEnd",
-    label: "Date de fin",
-    type: "date",
-    halfWidth: true,
-  },
-];
-
-const PROJECT_FIELDS: ProfileItemField<ProjectItem>[] = [
-  {
-    key: "name",
-    label: "Nom du projet",
-    placeholder: "TrocSkillHub",
-  },
-  {
-    key: "description",
-    label: "Description",
-    type: "textarea",
-    placeholder: "Objectif et résumé du projet",
-  },
-  {
-    key: "links",
-    label: "Lien",
-    placeholder: "https://example.com",
-  },
-  {
-    key: "dateStart",
-    label: "Date de début",
-    type: "date",
-    halfWidth: true,
-  },
-  {
-    key: "dateEnd",
-    label: "Date de fin",
-    type: "date",
-    halfWidth: true,
-  },
-];
+import type {
+  ProfileMainProps,
+  ProfileSectionKey,
+  SectionCardProps,
+  SectionEditState,
+} from "../../types/profile.types";
 
 function SectionCard({
   title,
@@ -163,20 +60,7 @@ function SectionCard({
   editLabel,
   editContent,
   children,
-}: {
-  title: string;
-  emptyMessage: string;
-  isEmpty: boolean;
-  isEditing: boolean;
-  isActive: boolean;
-  onEditClick: () => void;
-  onCancel: () => void;
-  onSave: () => void;
-  isSaving: boolean;
-  editLabel: string;
-  editContent: React.ReactNode;
-  children: React.ReactNode;
-}) {
+}: SectionCardProps) {
   return (
     <EditableProfileCard
       isEditing={isEditing}

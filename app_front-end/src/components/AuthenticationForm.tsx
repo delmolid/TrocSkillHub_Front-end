@@ -6,31 +6,15 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { FranceCityAutocomplete } from "./auth/FranceCityAutocomplete";
+import { FRANCE } from "../constantes";
 import { register as registerUser, login as loginUser } from "../services/authService";
+import type {
+  AuthMessageProps,
+  LoginFields,
+  RegisterFields,
+} from "../types/auth.types";
 
-type LoginFields = {
-  email: string;
-  password: string;
-};
-
-type RegisterFields = {
-  nom: string;
-  prenom: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  city: string;
-};
-
-const FRANCE = "France";
-
-function AuthMessage({
-  variant,
-  children,
-}: {
-  variant: "error" | "success";
-  children: React.ReactNode;
-}) {
+function AuthMessage({ variant, children }: AuthMessageProps) {
   return (
     <p className={variant === "success" ? "auth-message-success" : "auth-message-error"}>
       {children}

@@ -1,6 +1,6 @@
 
 
-/** Corps partiel accepté par PATCH /users/:id */
+/** Partial body accepted by PATCH /users/:id */
 export type UpdateProfilUserPayload = Partial<ApiUser>;
 
 export interface EducationItem {
@@ -65,6 +65,8 @@ export interface needs {
   level?: string;
   type?: string;
 }
+
+export type RawKnowledgeItem = (skills | needs) & { id?: number };
 
 export interface UserCardData {
   photo: string;

@@ -1,18 +1,7 @@
 import React from "react";
 import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
-import type { Knowledge } from "../../types/knowledge.types";
-import type { skills } from "../../types/UserProfile.types";
-
-interface KnowledgeListEditorProps {
-  id: string;
-  label: string;
-  items: skills[];
-  knowledges: Knowledge[];
-  isLoading?: boolean;
-  isError?: boolean;
-  onChange: (items: skills[]) => void;
-}
+import type { KnowledgeListEditorProps } from "../../types/profile.types";
 
 const KnowledgeListEditor: React.FC<KnowledgeListEditorProps> = ({
   id,

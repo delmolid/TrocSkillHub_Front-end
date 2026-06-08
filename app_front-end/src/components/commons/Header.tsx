@@ -15,7 +15,6 @@ export const Header: React.FC = () => {
         </li>
       </ul>
 
-      {/* Bouton hamburger (visible uniquement en mobile) */}
       <button
         className="menu-toggle"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -26,7 +25,6 @@ export const Header: React.FC = () => {
         <span></span>
       </button>
 
-      {/* Menu déroulant */}
       <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
         <ul className="nav-center">
           <li>
