@@ -20,6 +20,8 @@ RUN --mount=type=cache,target=/root/.npm npm ci
 COPY . .
 
 # Build the React.js application (outputs to /app/dist)
+ARG VITE_API_BASE_URL=/api
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 RUN npm run build
 
 # =========================================
@@ -31,8 +33,9 @@ FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
 # Use a built-in non-root user for security best practices
 USER nginx
 
-# Copy custom Nginx config
+# Copy custom Nginx config and API proxy template
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY api-proxy.conf.template /etc/nginx/templates/api-proxy.conf.template
 
 # Copy the static build output from the build stage to Nginx's default HTML serving directory
 COPY --chown=nginx:nginx --from=builder /app_front-end/dist /usr/share/nginx/html
