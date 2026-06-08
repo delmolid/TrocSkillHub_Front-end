@@ -9,8 +9,8 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-/** Normalise education | experience | project (null, objet, tableau ou texte) en liste */
-export function toSectionItems<T extends Record<string, unknown>>(
+/** Normalizes education | experience | project (null, object, array, or string) into a list. */
+export function toSectionItems<T extends object>(
   data: ProfileSectionData,
 ): T[] {
   if (data == null) return [];
@@ -21,7 +21,7 @@ export function toSectionItems<T extends Record<string, unknown>>(
       const parsed = JSON.parse(trimmed) as unknown;
       return toSectionItems<T>(parsed as ProfileSectionData);
     } catch {
-      return [{ description: trimmed } as T];
+      return [{ name: trimmed, job: trimmed } as T];
     }
   }
   if (Array.isArray(data)) {
@@ -33,13 +33,18 @@ export function toSectionItems<T extends Record<string, unknown>>(
   return [];
 }
 
+function formatDisplayPeriod(dateStart?: string, dateEnd?: string): string | null {
+  if (dateStart && dateEnd) return `${dateStart} - ${dateEnd}`;
+  return dateStart ?? dateEnd ?? null;
+}
+
 export function getEducationTitle(item: EducationItem): string {
-  return item.name ?? item.name ?? "Formation";
+  return item.name ?? "Formation";
 }
 
 export function getEducationSubtitle(item: EducationItem): string | null {
-  const place = item.school ?? item.school ?? item.school;
-  const period = item.dateStart ?? item.dateStart;
+  const place = item.school;
+  const period = formatDisplayPeriod(item.dateStart, item.dateEnd);
   if (place && period) return `${place} • ${period}`;
   return place ?? period ?? null;
 }
@@ -50,7 +55,7 @@ export function getExperienceTitle(item: ExperienceItem): string {
 
 export function getExperienceSubtitle(item: ExperienceItem): string | null {
   const org = item.company;
-  const period = item.dateStart ?? item.dateEnd;
+  const period = formatDisplayPeriod(item.dateStart, item.dateEnd);
   if (org && period) return `${org} • ${period}`;
   return org ?? period ?? null;
 }

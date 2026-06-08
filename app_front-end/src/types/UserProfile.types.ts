@@ -1,28 +1,28 @@
-/**
- * types/UserProfile.ts
- * Définition des types pour le profil utilisateur (alignés sur l'API /users/:id)
- */
+
+
+/** Partial body accepted by PATCH /users/:id */
+export type UpdateProfilUserPayload = Partial<ApiUser>;
 
 export interface EducationItem {
   name?: string;
   school?: string;
-  dateStart?: string;
-  dateEnd?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
 }
 
 export interface ExperienceItem {
   job?: string;
   company?: string;
-  dateStart?: string;
-  dateEnd?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
 }
 
 export interface ProjectItem {
   name?: string;
   description?: string;
   links?: string;
-  dateStart?: string;
-  dateEnd?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
 }
 
 export type ProfileSectionData =
@@ -53,16 +53,20 @@ export interface ApiUser {
 }
 
 export interface skills {
+  knowledgeId?: number;
   knowledgeName?: string;
   level?: string;
   type?: string;
 }
 
 export interface needs {
+  knowledgeId?: number;
   knowledgeName?: string;
   level?: string;
   type?: string;
 }
+
+export type RawKnowledgeItem = (skills | needs) & { id?: number };
 
 export interface UserCardData {
   photo: string;

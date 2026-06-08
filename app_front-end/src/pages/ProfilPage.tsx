@@ -18,7 +18,7 @@ const ProfilPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-page-bg">
-        <p className="text-gray-600">Chargement...</p>
+        <p className="text-text">Chargement...</p>
       </div>
     );
   }
