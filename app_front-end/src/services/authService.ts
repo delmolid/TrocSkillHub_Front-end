@@ -1,25 +1,11 @@
-/**
- * services/authService.ts
- * Service pour gérer l'authentification (inscription, connexion, déconnexion)
- */
+import { API_AUTH_URL } from "../constantes";
+import type { CurrentUser, LoginPayload, RegisterPayload } from "../types/auth.types";
 
-const API_BASE_URL = 'http://localhost:8099/api/auth';
-
-/**
- * Inscrit un nouvel utilisateur
- * @param data - Données d'inscription
- * @returns Promise avec le message de confirmation
- */
-export const register = async (data: {
-  nom: string;
-  prenom: string;
-  email: string;
-  password: string;
-  city: string;
-  country: string;
-}): Promise<{ message: string }> => {
+export const register = async (
+  data: RegisterPayload,
+): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/register`, {
+    const response = await fetch(`${API_AUTH_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -40,22 +26,16 @@ export const register = async (data: {
   }
 };
 
-/**
- * Connecte un utilisateur
- * @param data - Email et mot de passe
- * @returns Promise avec le message de confirmation
- */
-export const login = async (data: {
-  email: string;
-  password: string;
-}): Promise<{ message: string }> => {
+export const login = async (
+  data: LoginPayload,
+): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/login`, {
+    const response = await fetch(`${API_AUTH_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // IMPORTANT : pour envoyer/recevoir les cookies
+      credentials: 'include',
       body: JSON.stringify(data),
     });
 
@@ -72,15 +52,11 @@ export const login = async (data: {
   }
 };
 
-/**
- * Déconnecte l'utilisateur
- * @returns Promise avec le message de confirmation
- */
 export const logout = async (): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/logout`, {
+    const response = await fetch(`${API_AUTH_URL}/logout`, {
       method: 'POST',
-      credentials: 'include', // IMPORTANT : pour envoyer le cookie JWT
+      credentials: 'include',
     });
 
     const result = await response.json();
@@ -96,22 +72,11 @@ export const logout = async (): Promise<{ message: string }> => {
   }
 };
 
-/**
- * Récupère les informations de l'utilisateur connecté
- * @returns Promise avec les infos de l'utilisateur
- */
-export const getCurrentUser = async (): Promise<{
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  city: string;
-  country: string;
-}> => {
+export const getCurrentUser = async (): Promise<CurrentUser> => {
   try {
-    const response = await fetch(`${API_BASE_URL}/me`, {
+    const response = await fetch(`${API_AUTH_URL}/me`, {
       method: 'GET',
-      credentials: 'include', // IMPORTANT : envoie le cookie JWT
+      credentials: 'include',
     });
 
     if (!response.ok) {

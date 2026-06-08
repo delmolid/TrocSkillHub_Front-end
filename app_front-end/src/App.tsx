@@ -1,8 +1,3 @@
-/**
- * App.tsx
- * Routes principales de l'application
- */
-
 import React from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import ProfilPage from "./pages/ProfilPage";
@@ -15,8 +10,6 @@ const App: React.FC = () => {
       <Route path="/" element={<ProfilPage />} />
       <Route path="/login" element={<AuthentificationPage />} />
       <Route path="/profile" element={<ProfilPage />} />
-      
-      {/* Redirection par défaut si route inconnue */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

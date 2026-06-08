@@ -1,24 +1,73 @@
-/**
- * types/UserProfile.ts
- * Définition des types pour le profil utilisateur
- */
 
-import ProfilPage from "../pages/ProfilPage";
 
-// Type correspondant à la structure de l'API backend
+/** Partial body accepted by PATCH /users/:id */
+export type UpdateProfilUserPayload = Partial<ApiUser>;
+
+export interface EducationItem {
+  name?: string;
+  school?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
+}
+
+export interface ExperienceItem {
+  job?: string;
+  company?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
+}
+
+export interface ProjectItem {
+  name?: string;
+  description?: string;
+  links?: string;
+  dateStart?: Date;
+  dateEnd?: Date;
+}
+
+export type ProfileSectionData =
+  | string
+  | EducationItem
+  | ExperienceItem
+  | ProjectItem
+  | EducationItem[]
+  | ExperienceItem[]
+  | ProjectItem[]
+  | null;
+
 export interface ApiUser {
-  id: number;
+  id?: number;
   firstName: string;
   lastName: string;
   email: string;
-  address: string;
+  address?: string | null;
   city: string;
   country: string;
-  phoneNumber: string;
-  description: string;
+  phoneNumber: string | null;
+  description: string | null;
+  skills: skills[];
+  needs: needs[];
+  education: ProfileSectionData;
+  experience: ProfileSectionData;
+  project: ProfileSectionData;
 }
 
-// Type pour le composant UserCard
+export interface skills {
+  knowledgeId?: number;
+  knowledgeName?: string;
+  level?: string;
+  type?: string;
+}
+
+export interface needs {
+  knowledgeId?: number;
+  knowledgeName?: string;
+  level?: string;
+  type?: string;
+}
+
+export type RawKnowledgeItem = (skills | needs) & { id?: number };
+
 export interface UserCardData {
   photo: string;
   prenom: string;
@@ -28,7 +77,6 @@ export interface UserCardData {
   instagram?: string;
 }
 
-// Type complet du profil utilisateur (pour extension future)
 export interface UserProfile extends UserCardData {
   about: string;
   competences: string[];

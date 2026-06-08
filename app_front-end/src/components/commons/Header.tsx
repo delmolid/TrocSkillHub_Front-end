@@ -9,11 +9,12 @@ export const Header: React.FC = () => {
     <nav className="navbar">
       <ul className="nav-left">
         <li>
-          <h1>TROCSKILL-HUB</h1>
+          <h1 className="font-heading text-xl font-bold max-md:text-base max-sm:text-sm">
+            TROCSKILL-HUB
+          </h1>
         </li>
       </ul>
 
-      {/* Bouton hamburger (visible uniquement en mobile) */}
       <button
         className="menu-toggle"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -24,7 +25,6 @@ export const Header: React.FC = () => {
         <span></span>
       </button>
 
-      {/* Menu déroulant */}
       <div className={`nav-menu ${menuOpen ? "active" : ""}`}>
         <ul className="nav-center">
           <li>

@@ -1,0 +1,569 @@
+/* Design tokens TrocSkillHub */
+:root {
+  --ts-font-heading: Inter, ui-sans-serif, system-ui, sans-serif;
+  --ts-font-body: Inter, ui-sans-serif, system-ui, sans-serif;
+  --ts-text: #060605;
+  --ts-page-bg: #fafbf9;
+  --ts-form-bg: #ffffff;
+  --ts-form-block-bg: rgb(180 200 202 / 22%);
+  --ts-primary: #176b87;
+  --ts-primary-green: #87986f;
+  --ts-accent: #70744f;
+  --ts-secondary: #b4c8ca;
+  --ts-input-bg: #ffffff;
+  --ts-input-border: #176b87;
+  --ts-input-border-hover: #70744f;
+  --ts-focus-ring: rgb(23 107 135 / 22%);
+  --ts-selected-bg: rgb(135 152 111 / 18%);
+  --ts-selected-text: #060605;
+  --ts-radius: 0.5rem;
+  --ts-text-sm: 0.75rem;
+  --ts-text-base: 1rem;
+
+  /* Buttons */
+  --ts-btn-primary-bg: var(--ts-accent);
+  --ts-btn-primary-hover: var(--ts-primary-green);
+  --ts-btn-primary-active: #5a5e3f;
+  --ts-btn-primary-text: #ffffff;
+
+  --ts-btn-secondary-bg: transparent;
+  --ts-btn-secondary-border: var(--ts-primary);
+  --ts-btn-secondary-text: var(--ts-text);
+  --ts-btn-secondary-hover-bg: var(--ts-selected-bg);
+  --ts-btn-secondary-active-bg: rgb(135 152 111 / 32%);
+
+  --ts-btn-transition: background-color 0.2s ease, color 0.2s ease,
+    border-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+
+  /* Profile buttons (Edit, Save, Cancel) */
+  --ts-btn-profile-radius: 9999px;
+  --ts-btn-profile-border: 1.5px;
+  --ts-btn-profile-shadow: 0 1px 3px rgb(6 6 5 / 8%);
+  --ts-btn-profile-shadow-hover: 0 4px 14px rgb(6 6 5 / 12%);
+}
+
+/* ── Button variants ── */
+.p-button.ts-btn-primary {
+  border: 1px solid var(--ts-btn-primary-bg);
+  background: var(--ts-btn-primary-bg);
+  color: var(--ts-btn-primary-text);
+  font-family: var(--ts-font-heading);
+  font-weight: 700;
+  transition: var(--ts-btn-transition);
+}
+
+.p-button.ts-btn-primary:enabled:hover {
+  background: var(--ts-btn-primary-hover);
+  border-color: var(--ts-btn-primary-hover);
+  color: var(--ts-text);
+}
+
+.p-button.ts-btn-primary:enabled:active {
+  background: var(--ts-btn-primary-active);
+  border-color: var(--ts-btn-primary-active);
+  color: var(--ts-btn-primary-text);
+  transform: scale(0.98);
+}
+
+.p-button.ts-btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ts-focus-ring);
+}
+
+.p-button.ts-btn-secondary,
+.p-button.ts-btn-secondary.p-button-outlined {
+  border: 1px solid var(--ts-btn-secondary-border);
+  background: var(--ts-btn-secondary-bg);
+  color: var(--ts-btn-secondary-text);
+  font-family: var(--ts-font-body);
+  font-weight: 400;
+  transition: var(--ts-btn-transition);
+}
+
+.p-button.ts-btn-secondary:enabled:hover,
+.p-button.ts-btn-secondary.p-button-outlined:enabled:hover {
+  background: var(--ts-btn-secondary-hover-bg);
+  border-color: var(--ts-input-border-hover);
+  color: var(--ts-text);
+}
+
+.p-button.ts-btn-secondary:enabled:active,
+.p-button.ts-btn-secondary.p-button-outlined:enabled:active {
+  background: var(--ts-btn-secondary-active-bg);
+  border-color: var(--ts-primary);
+  color: var(--ts-text);
+  transform: scale(0.98);
+}
+
+.p-button.ts-btn-secondary:focus-visible,
+.p-button.ts-btn-secondary.p-button-outlined:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ts-focus-ring);
+}
+
+/* Profile — Edit / Save / Cancel */
+.p-button.ts-btn-profile {
+  border-radius: var(--ts-btn-profile-radius);
+  border-width: var(--ts-btn-profile-border);
+  padding: 0.5rem 1.35rem;
+  min-height: 2.25rem;
+  letter-spacing: 0.02em;
+}
+
+.p-button.ts-btn-primary.ts-btn-profile {
+  border-style: solid;
+  border-color: rgb(255 255 255 / 28%);
+  background: var(--ts-btn-primary-bg);
+  box-shadow: var(--ts-btn-profile-shadow),
+    inset 0 1px 0 rgb(255 255 255 / 18%);
+}
+
+.p-button.ts-btn-primary.ts-btn-profile:enabled:hover {
+  border-color: rgb(255 255 255 / 42%);
+  background: var(--ts-btn-primary-hover);
+  box-shadow: var(--ts-btn-profile-shadow-hover),
+    inset 0 1px 0 rgb(255 255 255 / 22%);
+}
+
+.p-button.ts-btn-primary.ts-btn-profile:enabled:active {
+  border-color: rgb(255 255 255 / 18%);
+  background: var(--ts-btn-primary-active);
+  box-shadow: inset 0 2px 4px rgb(6 6 5 / 18%);
+}
+
+.p-button.ts-btn-primary.ts-btn-profile:focus-visible {
+  outline: none;
+  box-shadow: var(--ts-btn-profile-shadow), 0 0 0 3px var(--ts-focus-ring);
+}
+
+.p-button.ts-btn-secondary.ts-btn-profile,
+.p-button.ts-btn-secondary.ts-btn-profile.p-button-outlined {
+  border-style: solid;
+  border-color: rgb(23 107 135 / 38%);
+  background: rgb(255 255 255 / 72%);
+  backdrop-filter: blur(4px);
+  box-shadow: var(--ts-btn-profile-shadow);
+}
+
+.p-button.ts-btn-secondary.ts-btn-profile:enabled:hover,
+.p-button.ts-btn-secondary.ts-btn-profile.p-button-outlined:enabled:hover {
+  border-color: var(--ts-accent);
+  background: var(--ts-btn-secondary-hover-bg);
+  box-shadow: var(--ts-btn-profile-shadow-hover);
+}
+
+.p-button.ts-btn-secondary.ts-btn-profile:enabled:active,
+.p-button.ts-btn-secondary.ts-btn-profile.p-button-outlined:enabled:active {
+  border-color: var(--ts-primary);
+  background: var(--ts-btn-secondary-active-bg);
+  box-shadow: inset 0 2px 4px rgb(6 6 5 / 10%);
+}
+
+.p-button.ts-btn-secondary.ts-btn-profile:focus-visible,
+.p-button.ts-btn-secondary.ts-btn-profile.p-button-outlined:focus-visible {
+  outline: none;
+  box-shadow: var(--ts-btn-profile-shadow), 0 0 0 3px var(--ts-focus-ring);
+}
+
+.p-button.ts-btn-auth,
+.p-button.auth-submit {
+  margin-top: 0.5rem;
+  width: 100%;
+  border: 1px solid var(--ts-btn-primary-bg);
+  border-radius: 50px;
+  background: var(--ts-btn-primary-bg);
+  padding: 1rem;
+  font-family: var(--ts-font-heading);
+  font-size: var(--ts-text-base);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ts-btn-primary-text);
+  transition: var(--ts-btn-transition);
+}
+
+.p-button.ts-btn-auth:enabled:hover,
+.p-button.auth-submit:enabled:hover {
+  background: var(--ts-btn-primary-hover);
+  border-color: var(--ts-btn-primary-hover);
+  color: var(--ts-text);
+}
+
+.p-button.ts-btn-auth:enabled:active,
+.p-button.auth-submit:enabled:active {
+  background: var(--ts-btn-primary-active);
+  border-color: var(--ts-btn-primary-active);
+  color: var(--ts-btn-primary-text);
+  transform: scale(0.98);
+}
+
+.p-button.ts-btn-auth:focus-visible,
+.p-button.auth-submit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--ts-focus-ring);
+}
+
+/* Global PrimeReact typography */
+.p-component,
+.p-inputtext,
+.p-inputtextarea,
+.p-dropdown-label,
+.p-button-label {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-base);
+  font-weight: 400;
+  color: var(--ts-text);
+}
+
+/* Auth form — project palette and typography */
+.auth-form-panel {
+  box-sizing: border-box;
+  width: 380px;
+  border-radius: 20px;
+  border: 1px solid var(--ts-input-border);
+  background: var(--ts-form-bg);
+  box-shadow: 0 8px 24px rgb(6 6 5 / 8%);
+  font-family: var(--ts-font-body);
+  color: var(--ts-text);
+}
+
+@media (max-width: 1024px) {
+  .auth-form-panel {
+    width: 100%;
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-form-panel {
+    border-radius: 14px;
+  }
+}
+
+.auth-form-panel .p-inputtext,
+.auth-form-panel .p-dropdown,
+.auth-form-panel .p-autocomplete .p-inputtext {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--ts-input-border);
+  border-radius: 10px;
+  background: var(--ts-input-bg);
+  padding: 0.625rem 1rem;
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-base);
+  font-weight: 400;
+  color: var(--ts-text);
+  box-shadow: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form-panel .p-password {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.auth-form-panel .p-password .p-inputtext {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 2.75rem;
+  border: 1px solid var(--ts-input-border);
+  border-radius: 10px;
+  background: var(--ts-input-bg);
+  padding: 0.625rem 2.5rem 0.625rem 1rem;
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-base);
+  font-weight: 400;
+  color: var(--ts-text);
+  box-shadow: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form-panel .p-password .p-input-icon,
+.auth-form-panel .p-password .p-password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  width: auto;
+  min-height: unset;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ts-accent);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.auth-form-panel .p-inputtext:enabled:hover,
+.auth-form-panel .p-password .p-inputtext:enabled:hover,
+.auth-form-panel .p-autocomplete .p-inputtext:enabled:hover {
+  border-color: var(--ts-input-border-hover);
+}
+
+.auth-form-panel .p-inputtext:enabled:focus,
+.auth-form-panel .p-password .p-inputtext:enabled:focus,
+.auth-form-panel .p-dropdown:not(.p-disabled).p-focus,
+.auth-form-panel .p-autocomplete .p-inputtext:enabled:focus {
+  outline: none;
+  border-color: var(--ts-primary);
+  box-shadow: 0 0 0 3px var(--ts-focus-ring);
+}
+
+.auth-form-panel .p-dropdown {
+  align-items: center;
+}
+
+.auth-message-error {
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid rgb(220 38 38 / 30%);
+  background: var(--ts-form-bg);
+  padding: 0.75rem 1rem;
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  font-weight: 700;
+  color: #dc2626;
+}
+
+.auth-message-success {
+  margin: 0;
+  border-radius: 10px;
+  border: 1px solid var(--ts-primary-green);
+  background: var(--ts-selected-bg);
+  padding: 0.75rem 1rem;
+  text-align: center;
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  font-weight: 700;
+  color: var(--ts-text);
+}
+
+/* Profile form blocks (education, experience, project) */
+.profile-form-block {
+  background: var(--ts-form-block-bg);
+  border: 1px solid rgb(23 107 135 / 20%);
+  border-radius: var(--ts-radius);
+}
+
+.profile-field-label {
+  display: block;
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  font-weight: 400;
+  color: var(--ts-text);
+}
+
+/* ── Profile fields (edit mode) ── */
+.profile-field .p-inputtext,
+.profile-field .p-inputtextarea,
+.profile-field .p-dropdown,
+.profile-field .p-calendar .p-inputtext,
+.profile-dropdown.p-dropdown {
+  width: 100%;
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-base);
+  font-weight: 400;
+  color: var(--ts-text);
+  background: var(--ts-input-bg);
+  border: 1px solid var(--ts-input-border);
+  border-radius: var(--ts-radius);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-field .p-inputtext,
+.profile-field .p-inputtextarea,
+.profile-field .p-calendar .p-inputtext {
+  padding: 0.625rem 0.875rem;
+}
+
+.profile-field .p-dropdown {
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.profile-field .p-dropdown .p-dropdown-label {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-base);
+  color: var(--ts-text);
+  padding: 0.625rem 0.875rem;
+}
+
+.profile-field .p-dropdown .p-dropdown-label.p-placeholder {
+  color: rgb(6 6 5 / 55%);
+}
+
+.profile-field .p-dropdown .p-dropdown-trigger {
+  color: var(--ts-accent);
+  width: 2.5rem;
+}
+
+.profile-field .p-calendar {
+  width: 100%;
+}
+
+.profile-field .p-calendar .p-datepicker-trigger {
+  color: var(--ts-accent);
+  border-left: 1px solid var(--ts-input-border);
+  background: var(--ts-page-bg);
+  border-radius: 0 var(--ts-radius) var(--ts-radius) 0;
+}
+
+.profile-field .p-inputtext:enabled:hover,
+.profile-field .p-inputtextarea:enabled:hover,
+.profile-field .p-dropdown:not(.p-disabled):hover,
+.profile-field .p-calendar:not(.p-disabled):hover .p-inputtext,
+.profile-dropdown.p-dropdown:not(.p-disabled):hover {
+  border-color: var(--ts-input-border-hover);
+}
+
+.profile-field .p-inputtext:enabled:focus,
+.profile-field .p-inputtextarea:enabled:focus,
+.profile-field .p-dropdown:not(.p-disabled).p-focus,
+.profile-field .p-calendar:not(.p-disabled).p-focus .p-inputtext,
+.profile-dropdown.p-dropdown:not(.p-disabled).p-focus {
+  outline: none;
+  border-color: var(--ts-primary);
+  box-shadow: 0 0 0 3px var(--ts-focus-ring);
+}
+
+/* ── Dropdown list (skills / needs) ── */
+.ts-dropdown-panel.p-dropdown-panel {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  color: var(--ts-text);
+  background: var(--ts-input-bg);
+  border: 1px solid var(--ts-input-border);
+  border-radius: var(--ts-radius);
+  box-shadow: 0 8px 24px rgb(6 6 5 / 10%);
+  overflow: hidden;
+}
+
+.ts-dropdown-panel .p-dropdown-header {
+  background: var(--ts-page-bg);
+  border-bottom: 1px solid rgb(23 107 135 / 15%);
+  padding: 0.5rem 0.75rem;
+}
+
+.ts-dropdown-panel .p-dropdown-filter {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  color: var(--ts-text);
+  border: 1px solid var(--ts-input-border);
+  border-radius: var(--ts-radius);
+}
+
+.ts-dropdown-panel .p-dropdown-items {
+  padding: 0.25rem;
+}
+
+.ts-dropdown-panel .p-dropdown-item {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-base);
+  font-weight: 400;
+  color: var(--ts-text);
+  border-radius: calc(var(--ts-radius) - 2px);
+  margin: 1px 0;
+  padding: 0.5rem 0.75rem;
+}
+
+.ts-dropdown-panel .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover {
+  background: var(--ts-page-bg);
+  color: var(--ts-text);
+}
+
+.ts-dropdown-panel .p-dropdown-item.p-highlight {
+  background: var(--ts-selected-bg);
+  color: var(--ts-selected-text);
+  font-weight: 700;
+}
+
+/* ── Calendar (profile dates) ── */
+.ts-calendar-panel.p-datepicker {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  color: var(--ts-text);
+  background: var(--ts-input-bg);
+  border: 1px solid var(--ts-input-border);
+  border-radius: var(--ts-radius);
+  box-shadow: 0 8px 24px rgb(6 6 5 / 10%);
+  padding: 0.5rem;
+}
+
+.ts-calendar-panel .p-datepicker-header {
+  font-family: var(--ts-font-heading);
+  font-size: var(--ts-text-base);
+  font-weight: 700;
+  color: var(--ts-text);
+  background: var(--ts-page-bg);
+  border-bottom: 1px solid rgb(23 107 135 / 15%);
+  border-radius: var(--ts-radius) var(--ts-radius) 0 0;
+  padding: 0.5rem;
+}
+
+.ts-calendar-panel .p-datepicker-prev,
+.ts-calendar-panel .p-datepicker-next {
+  color: var(--ts-accent);
+}
+
+.ts-calendar-panel .p-datepicker-prev:enabled:hover,
+.ts-calendar-panel .p-datepicker-next:enabled:hover {
+  background: var(--ts-selected-bg);
+  color: var(--ts-primary);
+}
+
+.ts-calendar-panel .p-datepicker-title .p-datepicker-month,
+.ts-calendar-panel .p-datepicker-title .p-datepicker-year {
+  font-family: var(--ts-font-heading);
+  font-weight: 700;
+  color: var(--ts-text);
+}
+
+.ts-calendar-panel table th {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  font-weight: 700;
+  color: var(--ts-accent);
+}
+
+.ts-calendar-panel table td > span {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  font-weight: 400;
+  color: var(--ts-text);
+  border-radius: var(--ts-radius);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.ts-calendar-panel table td > span:not(.p-disabled):not(.p-highlight):hover {
+  background: var(--ts-page-bg);
+  color: var(--ts-text);
+}
+
+.ts-calendar-panel table td.p-datepicker-today > span {
+  border: 1px solid var(--ts-accent);
+  color: var(--ts-text);
+  font-weight: 700;
+}
+
+.ts-calendar-panel table td > span.p-highlight {
+  background: var(--ts-primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.ts-calendar-panel .p-monthpicker .p-monthpicker-month,
+.ts-calendar-panel .p-yearpicker .p-yearpicker-year {
+  font-family: var(--ts-font-body);
+  font-size: var(--ts-text-sm);
+  color: var(--ts-text);
+  border-radius: var(--ts-radius);
+}
+
+.ts-calendar-panel .p-monthpicker .p-monthpicker-month.p-highlight,
+.ts-calendar-panel .p-yearpicker .p-yearpicker-year.p-highlight {
+  background: var(--ts-primary);
+  color: #ffffff;
+  font-weight: 700;
+}

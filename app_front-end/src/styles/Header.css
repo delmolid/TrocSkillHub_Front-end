@@ -1,10 +1,11 @@
-/* ===== STYLES PAR DÉFAUT (Desktop) ===== */
+/* ===== DEFAULT STYLES (Desktop) ===== */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 30px;
   position: relative;
+  color: #060605;
 }
 
 .nav-left,
@@ -19,8 +20,8 @@
 }
 
 .nav-left h1 {
-  font-size: 20px;
   margin: 0;
+  color: #70744f;
 }
 
 .nav-menu {
@@ -50,12 +51,12 @@
 .menu-toggle span {
   width: 25px;
   height: 3px;
-  background-color: var(--text-color, #333);
+  background-color: #060605;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
-/* ===== TABLETTE ===== */
+/* ===== TABLET ===== */
 @media (max-width: 1024px) {
   .navbar {
     padding: 15px 20px;
@@ -76,15 +77,12 @@
     padding: 12px 15px;
   }
   
-  .nav-left h1 {
-    font-size: 16px;
-  }
   
   .menu-toggle {
     display: flex;
   }
   
-  /* Menu caché par défaut */
+  /* Menu hidden by default */
   .nav-menu {
     visibility: hidden;
     opacity: 0;
@@ -102,7 +100,7 @@
     transition: opacity 0.3s ease, visibility 0.3s ease;
   }
   
-  /* Menu visible quand actif */
+  /* Menu visible when active */
   .nav-menu.active {
     visibility: visible;
     opacity: 1;
@@ -128,14 +126,10 @@
   }
 }
 
-/* ===== PETIT MOBILE ===== */
+/* ===== SMALL MOBILE ===== */
 @media (max-width: 480px) {
   .navbar {
     padding: 10px;
-  }
-  
-  .nav-left h1 {
-    font-size: 14px;
   }
   
   .nav-menu {
