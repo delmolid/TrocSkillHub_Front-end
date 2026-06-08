@@ -5,6 +5,7 @@
   align-items: center;
   padding: 15px 30px;
   position: relative;
+  color: #060605;
 }
 
 .nav-left,
@@ -19,8 +20,8 @@
 }
 
 .nav-left h1 {
-  font-size: 20px;
   margin: 0;
+  color: #70744f;
 }
 
 .nav-menu {
@@ -50,7 +51,7 @@
 .menu-toggle span {
   width: 25px;
   height: 3px;
-  background-color: var(--text-color, #333);
+  background-color: #060605;
   border-radius: 2px;
   transition: all 0.3s ease;
 }
@@ -76,9 +77,6 @@
     padding: 12px 15px;
   }
   
-  .nav-left h1 {
-    font-size: 16px;
-  }
   
   .menu-toggle {
     display: flex;
@@ -132,10 +130,6 @@
 @media (max-width: 480px) {
   .navbar {
     padding: 10px;
-  }
-  
-  .nav-left h1 {
-    font-size: 14px;
   }
   
   .nav-menu {

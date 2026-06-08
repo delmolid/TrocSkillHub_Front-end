@@ -1,6 +1,5 @@
 import React, { useEffect, useId, useState } from "react";
-import { Alert } from "@/components/ui/alert";
-import { Input } from "@/components/ui/input";
+import { InputText } from "primereact/inputtext";
 import { cn } from "@/lib/utils";
 import { useBanCommuneSearch } from "@/hooks/useBanCommuneSearch";
 import type { BanCommuneSuggestion } from "@/types/ban.types";
@@ -41,8 +40,7 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
 
   return (
     <div className="relative flex flex-col gap-1">
-      <Input
-        variant="auth"
+      <InputText
         value={inputValue}
         disabled={disabled}
         placeholder="Commune (ex. Paris, 75001…)"
@@ -64,11 +62,11 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
       />
 
       {error && (
-        <Alert variant="error">
+        <p className="auth-message-error">
           {error instanceof Error
             ? error.message
             : "Impossible de contacter l'API BAN."}
-        </Alert>
+        </p>
       )}
 
       {isOpen && !disabled && inputValue.trim().length >= 2 && (
@@ -81,11 +79,11 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
           )}
         >
           {isFetching && (
-            <li className="px-4 py-2 text-sm text-gray-500">Recherche…</li>
+            <li className="px-4 py-2 text-sm text-text">Recherche…</li>
           )}
 
           {!isFetching && suggestions.length === 0 && (
-            <li className="px-4 py-2 text-sm text-gray-500">
+            <li className="px-4 py-2 text-sm text-text">
               Aucune commune trouvée
             </li>
           )}
@@ -95,7 +93,7 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
               <li key={suggestion.code} role="option">
                 <button
                   type="button"
-                  className="w-full px-4 py-2 text-left text-sm text-gray-800 hover:bg-[#eef5ff]"
+                  className="w-full px-4 py-2 text-left text-sm text-text hover:bg-[#fafbf9]"
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => handleSelect(suggestion)}
                 >

@@ -1,11 +1,25 @@
-import { ApiUser } from '../types/UserProfile.types';
+import {
+  ApiUser,
+  type needs,
+  type skills,
+  type UpdateProfilUserPayload,
+} from '../types/UserProfile.types';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = 'http://localhost:8099/api';
+
+type RawKnowledgeItem = (skills | needs) & { id?: number };
+
+const normalizeKnowledgeItem = (item: RawKnowledgeItem): skills | needs => ({
+  knowledgeId: item.knowledgeId ?? item.id,
+  knowledgeName: item.knowledgeName,
+  level: item.level,
+  type: item.type,
+});
 
 const normalizeUser = (user: ApiUser): ApiUser => ({
   ...user,
-  skills: user.skills ?? [],
-  needs: user.needs ?? [],
+  skills: (user.skills ?? []).map(normalizeKnowledgeItem),
+  needs: (user.needs ?? []).map(normalizeKnowledgeItem),
   education: user.education ?? null,
   experience: user.experience ?? null,
   project: user.project ?? null,
@@ -31,6 +45,33 @@ export const getUserById = async (userId: number): Promise<ApiUser> => {
 
   if (!response.ok) {
     throw new Error(`Erreur HTTP: ${response.status}`);
+  }
+
+  const data: ApiUser = await response.json();
+  return normalizeUser(data);
+};
+
+export const updateProfilUser = async (
+  userId: number,
+  payload: UpdateProfilUserPayload,
+): Promise<ApiUser> => {
+  const response = await fetch(`${API_BASE_URL}/users/${userId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    const apiMessage = errorBody as { error?: string; message?: string } | null;
+    const message =
+      apiMessage?.error ??
+      apiMessage?.message ??
+      `Erreur HTTP: ${response.status}`;
+    throw new Error(message);
   }
 
   const data: ApiUser = await response.json();

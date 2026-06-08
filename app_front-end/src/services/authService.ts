@@ -3,8 +3,6 @@
  * Service pour gérer l'authentification (inscription, connexion, déconnexion)
  */
 
-const API_BASE_URL = 'http://localhost:8080/api/auth';
-
 export interface CurrentUser {
   id: number;
   firstName: string;
@@ -14,6 +12,8 @@ export interface CurrentUser {
   country: string;
 }
 
+
+const API_BASE_URL = "http://localhost:8099/api/auth"
 /**
  * Inscrit un nouvel utilisateur
  * @param data - Données d'inscription
@@ -64,7 +64,7 @@ export const login = async (data: {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include', // IMPORTANT : pour envoyer/recevoir les cookies
+      credentials: 'include', 
       body: JSON.stringify(data),
     });
 

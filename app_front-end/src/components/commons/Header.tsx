@@ -9,7 +9,9 @@ export const Header: React.FC = () => {
     <nav className="navbar">
       <ul className="nav-left">
         <li>
-          <h1>TROCSKILL-HUB</h1>
+          <h1 className="font-heading text-xl font-bold max-md:text-base max-sm:text-sm">
+            TROCSKILL-HUB
+          </h1>
         </li>
       </ul>
 

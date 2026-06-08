@@ -18,13 +18,13 @@ const UserCard: React.FC<UserCardData> = ({
       <VscAccount />
       </div>
 
-      <h2 className="mb-4 text-center text-lg font-semibold text-gray-800">
+      <h2 className="mb-4 text-center text-lg font-semibold text-text">
         {nomComplet}
       </h2>
 
       <div className="flex w-full flex-col gap-3">
-        <div className="flex items-center gap-2.5 py-2 text-gray-800">
-          <FaMapMarkerAlt className="shrink-0 text-xl text-gray-600" aria-hidden />
+        <div className="flex items-center gap-2.5 py-2 text-text">
+          <FaMapMarkerAlt className="shrink-0 text-xl text-text" aria-hidden />
           <span className="text-sm">{ville}</span>
         </div>
 
@@ -33,7 +33,7 @@ const UserCard: React.FC<UserCardData> = ({
             href={linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 py-2 text-gray-800 transition hover:translate-x-0.5 hover:text-primary"
+            className="flex items-center gap-2.5 py-2 text-text transition hover:translate-x-0.5 hover:text-primary"
             aria-label="Profil LinkedIn"
           >
             <FaLinkedin className="shrink-0 text-xl text-[#0077B5]" aria-hidden />
@@ -46,7 +46,7 @@ const UserCard: React.FC<UserCardData> = ({
             href={instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2.5 py-2 text-gray-800 transition hover:translate-x-0.5 hover:text-primary"
+            className="flex items-center gap-2.5 py-2 text-text transition hover:translate-x-0.5 hover:text-primary"
             aria-label="Profil Instagram"
           >
             <FaInstagram className="shrink-0 text-xl text-[#E4405F]" aria-hidden />
