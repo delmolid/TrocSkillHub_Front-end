@@ -36,7 +36,8 @@ jobs:
 
       - name: Install Playwright Firefox
         run: npx playwright install firefox --with-deps
-
+        
+  Playwright:
       - name: Run tests
         run: npm run test -- --run
 
