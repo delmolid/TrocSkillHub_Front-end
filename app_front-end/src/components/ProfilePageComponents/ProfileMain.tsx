@@ -9,6 +9,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useKnowledgesQuery } from "../../hooks/useKnowledgesQuery";
 import { useUpdateProfilUser, useUserQuery } from "../../hooks/useUserQuery";
 import { mapApiUserToUserCard, getUserDescription } from "../../utils/userMapper";
+import 'primeicons/primeicons.css';
 import {
   toSectionItems,
   getEducationTitle,
@@ -46,6 +47,7 @@ import type {
   SectionCardProps,
   SectionEditState,
 } from "../../types/profile.types";
+import { ProfileDeleteModal } from "./ProfileDeleteModal.component";
 
 function SectionCard({
   title,
@@ -84,10 +86,30 @@ function SectionCard({
   );
 }
 
+const TOOLTIP_OPTIONS = {
+  position: "bottom" as const,
+  showDelay: 300,
+  className: [
+    "[&_.p-tooltip-text]:bg-page-bg",
+    "[&_.p-tooltip-text]:text-text",
+    "[&_.p-tooltip-text]:font-body",
+    "[&_.p-tooltip-text]:text-sm",
+    "[&_.p-tooltip-text]:font-medium",
+    "[&_.p-tooltip-text]:rounded-lg",
+    "[&_.p-tooltip-text]:px-3",
+    "[&_.p-tooltip-text]:py-1.5",
+    "[&_.p-tooltip-text]:border",
+    "[&_.p-tooltip-text]:border-primary-border/30",
+    "[&_.p-tooltip-text]:shadow-md",
+    "[&_.p-tooltip-arrow]:!border-b-page-bg",
+  ].join(" "),
+};
+
 const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [sectionEdit, setSectionEdit] = useState<SectionEditState | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   const activeSection = sectionEdit?.section ?? null;
 
@@ -103,7 +125,7 @@ const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
     setSectionEdit(null);
     setSaveError(null);
   };
-
+ 
   const startEdit = (section: ProfileSectionKey) => {
     if (!user) return;
     setSaveError(null);
@@ -238,18 +260,16 @@ const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
   ) : null;
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-[1400px] flex-col gap-3 bg-page-bg px-5 py-8">
-      <div className="flex justify-end">
+    <main className="mx-auto flex min-h-screen max-w-350 flex-col gap-y-4 bg-page-bg px-5 py-8">
+      <div className="flex justify-end gap-x-2">
         <Button
           type="button"
-          label={isEditing ? "Terminer" : "Modifier"}
+          icon="pi pi-user-edit"
           severity={isEditing ? "secondary" : undefined}
           outlined={isEditing}
-          className={
-            isEditing
-              ? "ts-btn-secondary ts-btn-profile"
-              : "ts-btn-primary ts-btn-profile"
-          }
+          className="ts-btn-profile ts-btn-secondary"
+          tooltip={isEditing ? "Terminer" : "Modifier"}
+          tooltipOptions={TOOLTIP_OPTIONS}
           onClick={() => {
             if (isEditing) {
               setSectionEdit(null);
@@ -258,6 +278,23 @@ const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
             setIsEditing(!isEditing);
           }}
         />
+
+        <Button
+          type="button"
+          icon="pi pi-trash"
+          severity="danger"
+          outlined
+          className="ts-btn-profile ts-btn-secondary"
+          tooltip="Supprimer mon profil"
+          tooltipOptions={TOOLTIP_OPTIONS}
+          onClick={() => setDeleteModalVisible(true)}
+        />
+        <ProfileDeleteModal
+          userId={userId}
+          visible={deleteModalVisible}
+          onHide={() => setDeleteModalVisible(false)}
+        />
+       
       </div>
 
       <div className="flex flex-col items-start gap-8 lg:flex-row">

@@ -75,3 +75,25 @@ export const updateProfilUser = async (
   const data: ApiUser = await response.json();
   return normalizeUser(data);
 };
+
+export const DeleteProfilUser = async (
+  userId: number,
+): Promise<void> => {
+  const response = await fetch(`${API_USERS_URL}/${userId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => null);
+    const apiMessage = errorBody as { error?: string; message?: string } | null;
+    const message =
+      apiMessage?.error ??
+      apiMessage?.message ??
+      `Erreur HTTP: ${response.status}`;
+    throw new Error(message);
+  }
+};
