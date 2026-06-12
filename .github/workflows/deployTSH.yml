@@ -1,4 +1,4 @@
-name: trocskillhub UI CI
+name: TrocSkillHub UI CI/CD
 
 on:
   push:
@@ -72,3 +72,15 @@ jobs:
         with:
           name: code-coverage-report-trocskillhub
           path: app_front-end/output/test/code-coverage.html
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: [self-hosted, trocskillhubclient]
+
+    steps:
+      - name: Deploy frontend
+        run: |
+          cd ~/workspaceservice/TrocSkillHub_Front-end
+          git pull origin main
+          docker compose up -d --build

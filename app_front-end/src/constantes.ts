@@ -4,7 +4,6 @@ import type {
   ProjectItem,
 } from "./types/UserProfile.types";
 import type { ProfileItemField } from "./types/profile.types";
-
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "/api";
 
 export const API_AUTH_URL = `${API_BASE_URL}/auth`;
