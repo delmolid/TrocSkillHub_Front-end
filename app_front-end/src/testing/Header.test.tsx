@@ -1,66 +1,41 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { act } from "react";
+import { render, cleanup } from "vitest-browser-react";
+import { page } from "vitest/browser";
 import { Header } from "../components/commons/Header";
 
-let container: HTMLDivElement;
-
 beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
+  cleanup();
 });
 
-const render = (ui: React.ReactElement) => {
-  act(() => {
-    const root = ReactDOM.createRoot(container);
-    root.render(ui);
-  });
-};
-
 describe("Header", () => {
-  it("renders the title", () => {
+  it("renders the title", async () => {
     render(<Header />);
-    expect(document.body.textContent).toContain("TROCSKILL-HUB");
+    await expect.element(page.getByText("TROCSKILL-HUB")).toBeInTheDocument();
   });
 
-  it("menu is closed by default", () => {
+  it("menu is closed by default", async () => {
     render(<Header />);
-
-    const menu = container.querySelector(".nav-menu");
-
-    expect(menu?.classList.contains("active")).toBe(false);
+    await expect.element(page.getByRole("button", { name: "Menu" })).toBeInTheDocument();
+    const navMenu = document.querySelector(".nav-menu");
+    expect(navMenu?.classList.contains("active")).toBe(false);
   });
 
-  it("opens the menu when clicking the toggle button", () => {
+  it("opens the menu when clicking the toggle button", async () => {
     render(<Header />);
-
-    const button = container.querySelector("button.menu-toggle") as HTMLButtonElement;
-    const menu = container.querySelector(".nav-menu") as HTMLElement;
-
-    act(() => {
-      button.click();
-    });
-
-    expect(menu.classList.contains("active")).toBe(true);
+    const toggleButton = page.getByRole("button", { name: "Menu" });
+    await toggleButton.click();
+    const navMenu = document.querySelector(".nav-menu");
+    expect(navMenu?.classList.contains("active")).toBe(true);
   });
 
-  it("toggles the menu open and closed", () => {
+  it("toggles the menu open and closed", async () => {
     render(<Header />);
+    const toggleButton = page.getByRole("button", { name: "Menu" });
 
-    const button = container.querySelector("button.menu-toggle") as HTMLButtonElement;
-    const menu = container.querySelector(".nav-menu") as HTMLElement;
+    await toggleButton.click();
+    expect(document.querySelector(".nav-menu")?.classList.contains("active")).toBe(true);
 
-    act(() => {
-      button.click();
-    });
-
-    expect(menu.classList.contains("active")).toBe(true);
-
-    act(() => {
-      button.click();
-    });
-
-    expect(menu.classList.contains("active")).toBe(false);
+    await toggleButton.click();
+    expect(document.querySelector(".nav-menu")?.classList.contains("active")).toBe(false);
   });
 });
