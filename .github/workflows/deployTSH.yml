@@ -1,4 +1,4 @@
-name: trocskillhub UI CI
+name: TrocSkillHub UI CI/CD
 
 on:
   push:
@@ -75,10 +75,11 @@ jobs:
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: ci
+    needs: test
     runs-on: [self-hosted, trocskillhubclient]
+
     steps:
-      - name: Deploy backend
+      - name: Deploy frontend
         run: |
           cd ~/workspaceservice/TrocSkillHub_Front-end
           git pull origin main
