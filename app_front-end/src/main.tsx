@@ -6,6 +6,7 @@ import { PrimeReactProvider } from "primereact/api";
 import App from "./App";
 import { queryClient } from "./hooks/useUserQuery";
 import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./context/ToastContext";
 import "primereact/resources/themes/lara-light-teal/theme.css";
 import "primeicons/primeicons.css";
 import "./styles/tailwind.css";
@@ -23,7 +24,9 @@ ReactDOM.createRoot(rootElement).render(
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <BrowserRouter>
-            <App />
+            <ToastProvider>
+              <App />
+            </ToastProvider>
           </BrowserRouter>
         </AuthProvider>
         {import.meta.env.DEV}

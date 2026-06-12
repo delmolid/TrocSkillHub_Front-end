@@ -5,8 +5,10 @@ import tailwindcss from '@tailwindcss/vite'
 import { playwright } from '@vitest/browser-playwright'
 
 // https://vite.dev/config/
+const rootDir = path.resolve(__dirname, '..')
+
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, process.cwd(), '')
+  const env = loadEnv(mode, rootDir, '')
   const backendUrl = env.VITE_API_PROXY_TARGET
 
   if (mode === 'development' && !backendUrl) {
@@ -14,6 +16,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
+    envDir: rootDir,
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
