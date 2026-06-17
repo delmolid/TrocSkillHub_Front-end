@@ -81,6 +81,6 @@ jobs:
     steps:
       - name: Deploy frontend
         run: |
-          cd ~/workspaceservice/TrocSkillHub_Front-end
+          cd ~/workspace/TrocSkillHub_Front-end
           git pull origin main
           docker compose up -d --build
