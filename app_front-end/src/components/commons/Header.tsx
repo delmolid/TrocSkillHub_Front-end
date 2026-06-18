@@ -1,9 +1,12 @@
 import "../../styles/Header.css";
 import reactLogo from "../../assets/Ada_Lovelace.jpg";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  const isAuthPage = pathname === "/login";
 
   return (
     <nav className="navbar">
@@ -38,9 +41,11 @@ export const Header: React.FC = () => {
           </li>
         </ul>
         <ul className="nav-right">
-          <li>
-            <button>Déconnexion</button>
-          </li>
+          {!isAuthPage && (
+            <li>
+              <button>Déconnexion</button>
+            </li>
+          )}
           <li>
             <img src={reactLogo} alt="Profil" className="nav-avatar" />
           </li>
