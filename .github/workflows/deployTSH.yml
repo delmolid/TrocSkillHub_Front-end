@@ -112,10 +112,11 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Deploy to OVH
-        run: |
-          sshpass -p "${{ secrets.OVH_PASSWORD }}" scp \
-            -P "${{ secrets.OVH_PORT || 22 }}" \
-            -o StrictHostKeyChecking=no \
-            -r app_front-end/dist/* app_front-end/dist/.htaccess \
-            "${{ secrets.OVH_USER }}@${{ secrets.OVH_HOST }}:~/www/"
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.OVH_HOST }}
+          username: ${{ secrets.OVH_USER }}
+          password: ${{ secrets.OVH_PASSWORD }}
+          local-dir: app_front-end/dist/
+          server-dir: /www/
