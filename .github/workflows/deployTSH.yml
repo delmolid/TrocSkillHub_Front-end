@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
 
       - name: Install dependencies
         run: npm ci
@@ -56,7 +56,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
 
       - name: Install dependencies
         run: npm ci
@@ -76,11 +76,46 @@ jobs:
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: test
-    runs-on: [self-hosted, trocskillhubclient]
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy frontend
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        working-directory: app_front-end
+        run: npm ci
+
+      - name: Build frontend
+        working-directory: app_front-end
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: /api
+
+      - name: Add htaccess for React routing
         run: |
-          cd ~/workspace/TrocSkillHub_Front-end
-          git pull origin main
-          docker compose up -d --build
+          cat > app_front-end/dist/.htaccess <<'EOF'
+          RewriteEngine On
+          RewriteBase /
+
+          RewriteRule ^index\.html$ - [L]
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule . /index.html [L]
+          EOF
+
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Deploy to OVH
+        run: |
+          sshpass -p "${{ secrets.OVH_PASSWORD }}" scp \
+            -P "${{ secrets.OVH_PORT || 22 }}" \
+            -o StrictHostKeyChecking=no \
+            -r app_front-end/dist/* app_front-end/dist/.htaccess \
+            "${{ secrets.OVH_USER }}@${{ secrets.OVH_HOST }}:~/www/"
