@@ -78,44 +78,44 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
 
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: "22"
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
 
-    - name: Install dependencies
-      working-directory: app_front-end
-      run: npm ci
+      - name: Install dependencies
+        working-directory: app_front-end
+        run: npm ci
 
-    - name: Build frontend
-      working-directory: app_front-end
-      run: npm run build
-      env:
-        VITE_API_BASE_URL: /api
+      - name: Build frontend
+        working-directory: app_front-end
+        run: npm run build
+        env:
+          VITE_API_BASE_URL: /api
 
-    - name: Add htaccess for React routing
-      run: |
-        cat > app_front-end/dist/.htaccess <<'EOF'
-        RewriteEngine On
-        RewriteBase /
+      - name: Add htaccess for React routing
+        run: |
+          cat > app_front-end/dist/.htaccess <<'EOF'
+          RewriteEngine On
+          RewriteBase /
 
-        RewriteRule ^index\.html$ - [L]
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule . /index.html [L]
-        EOF
+          RewriteRule ^index\.html$ - [L]
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule . /index.html [L]
+          EOF
 
-    - name: Install sshpass
-      run: sudo apt-get update && sudo apt-get install -y sshpass
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
 
-    - name: Deploy to OVH
-      run: |
-        sshpass -p "${{ secrets.OVH_PASSWORD }}" scp \
-          -P "${{ secrets.OVH_PORT || 22 }}" \
-          -o StrictHostKeyChecking=no \
-          -r app_front-end/dist/* app_front-end/dist/.htaccess \
-          "${{ secrets.OVH_USER }}@${{ secrets.OVH_HOST }}:~/www/"
+      - name: Deploy to OVH
+        run: |
+          sshpass -p "${{ secrets.OVH_PASSWORD }}" scp \
+            -P "${{ secrets.OVH_PORT || 22 }}" \
+            -o StrictHostKeyChecking=no \
+            -r app_front-end/dist/* app_front-end/dist/.htaccess \
+            "${{ secrets.OVH_USER }}@${{ secrets.OVH_HOST }}:~/www/"
