@@ -100,9 +100,9 @@ jobs:
       - name: Add htaccess for React routing
         run: |
           cat > app_front-end/dist/.htaccess <<'EOF'
+          Options -Indexes -MultiViews
           RewriteEngine On
           RewriteBase /
-
           RewriteRule ^index\.html$ - [L]
           RewriteCond %{REQUEST_FILENAME} !-f
           RewriteCond %{REQUEST_FILENAME} !-d
