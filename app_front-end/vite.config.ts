@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) => {
   }
 
   return {
+    base: '/',     
     envDir: rootDir,
     plugins: [react(), tailwindcss()],
     resolve: {

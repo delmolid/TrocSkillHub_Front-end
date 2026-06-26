@@ -95,14 +95,14 @@ jobs:
         working-directory: app_front-end
         run: npm run build
         env:
-          VITE_API_BASE_URL: /api
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL_PROD }}
 
       - name: Add htaccess for React routing
         run: |
           cat > app_front-end/dist/.htaccess <<'EOF'
+          Options -Indexes -MultiViews
           RewriteEngine On
           RewriteBase /
-
           RewriteRule ^index\.html$ - [L]
           RewriteCond %{REQUEST_FILENAME} !-f
           RewriteCond %{REQUEST_FILENAME} !-d
@@ -112,10 +112,11 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update && sudo apt-get install -y sshpass
 
-      - name: Deploy to OVH
-        run: |
-          sshpass -p "${{ secrets.OVH_PASSWORD }}" scp \
-            -P "${{ secrets.OVH_PORT || 22 }}" \
-            -o StrictHostKeyChecking=no \
-            -r app_front-end/dist/* app_front-end/dist/.htaccess \
-            "${{ secrets.OVH_USER }}@${{ secrets.OVH_HOST }}:~/www/"
+      - name: Deploy to FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.OVH_HOST }}
+          username: ${{ secrets.OVH_USER }}
+          password: ${{ secrets.OVH_PASSWORD }}
+          local-dir: app_front-end/dist/
+          server-dir: /www/
