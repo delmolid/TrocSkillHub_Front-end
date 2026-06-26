@@ -7,7 +7,7 @@ import "./App.css";
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<ProfilPage />} />
+      <Route path="/" element={<AuthentificationPage />} />
       <Route path="/login" element={<AuthentificationPage />} />
       <Route path="/profile" element={<ProfilPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
