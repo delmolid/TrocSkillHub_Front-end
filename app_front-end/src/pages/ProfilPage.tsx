@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import ProfileMain from "../components/ProfilePageComponents/ProfileMain";
 import { useAuth } from "../context/AuthContext";
 import "../App.css";
@@ -11,7 +11,7 @@ const ProfilPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && isError) {
-      navigate("/login");
+      navigate({ to: "/login" });
     }
   }, [isLoading, isError, navigate]);
 

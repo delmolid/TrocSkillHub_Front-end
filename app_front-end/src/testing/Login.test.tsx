@@ -2,8 +2,8 @@ import { beforeEach, describe, expect, test, vi } from "vitest";
 import { render, cleanup } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MemoryRouter } from "react-router-dom";
 import { LoginForm } from "../components/auth/LoginForm";
+import { ComponentTestRouter } from "./testRouter";
 
 beforeEach(() => {
   cleanup();
@@ -16,9 +16,7 @@ const renderLoginForm = () => {
   });
   render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter>
-        <LoginForm />
-      </MemoryRouter>
+      <ComponentTestRouter component={LoginForm} initialPath="/login" />
     </QueryClientProvider>,
   );
 };

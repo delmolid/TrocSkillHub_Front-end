@@ -1,6 +1,6 @@
 import "../../styles/Header.css";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@tanstack/react-router";
 import { useLogoutUser } from "@/hooks/useAuthQuery";
 
 export const Header: React.FC = () => {
