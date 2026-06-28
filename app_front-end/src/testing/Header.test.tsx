@@ -2,8 +2,8 @@ import { describe, it, expect, beforeEach } from "vitest";
 import { render, cleanup } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { MemoryRouter } from "react-router-dom";
 import { Header } from "../components/commons/Header";
+import { ComponentTestRouter } from "./testRouter";
 
 beforeEach(() => {
   cleanup();
@@ -16,9 +16,7 @@ const renderHeader = (initialPath = "/") => {
 
   render(
     <QueryClientProvider client={queryClient}>
-      <MemoryRouter initialEntries={[initialPath]}>
-        <Header />
-      </MemoryRouter>
+      <ComponentTestRouter component={Header} initialPath={initialPath} />
     </QueryClientProvider>,
   );
 };

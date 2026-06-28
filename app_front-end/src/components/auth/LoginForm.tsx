@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -31,7 +31,7 @@ export const LoginForm: React.FC = () => {
       await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
 
       setTimeout(() => {
-        navigate("/profile");
+        navigate({ to: "/profile" });
       }, 1500);
     } catch (error: unknown) {
       setMessage(error instanceof Error ? error.message : "Erreur de connexion");
