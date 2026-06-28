@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
@@ -54,7 +54,7 @@ export const RegisterForm: React.FC = () => {
           password: data.password,
         });
         await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
-        navigate("/profile");
+        navigate({ to: "/profile" });
       }, 1500);
     } catch (error: unknown) {
       setMessage(

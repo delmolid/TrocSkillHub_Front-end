@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { RouterProvider } from "@tanstack/react-router";
 import { PrimeReactProvider } from "primereact/api";
-import App from "./App";
 import { queryClient } from "./hooks/useUserQuery";
 import { AuthProvider } from "./context/AuthContext";
-import { ToastProvider } from "./context/ToastContext";
+import { router } from "./router";
 import "primereact/resources/themes/lara-light-teal/theme.css";
 import "primeicons/primeicons.css";
 import "./styles/tailwind.css";
@@ -23,13 +22,8 @@ ReactDOM.createRoot(rootElement).render(
     <PrimeReactProvider>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <BrowserRouter>
-            <ToastProvider>
-              <App />
-            </ToastProvider>
-          </BrowserRouter>
+          <RouterProvider router={router} />
         </AuthProvider>
-        {import.meta.env.DEV}
       </QueryClientProvider>
     </PrimeReactProvider>
   </React.StrictMode>,

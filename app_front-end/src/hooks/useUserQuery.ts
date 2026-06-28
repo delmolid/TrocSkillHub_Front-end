@@ -4,7 +4,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 import { DeleteProfilUser, getUserById, updateProfilUser } from "../services/userService";
 import type { UpdateProfilUserVariables } from "../types/auth.types";
 import { useToast, TOAST_SEVERITY } from "../context/ToastContext";
@@ -58,7 +58,7 @@ export function useDeleteProfilUser() {
         className: TOAST_SEVERITY.success,
         contentClassName: "flex items-center gap-3 px-3.5 py-3",
       });
-      setTimeout(() => navigate("/login"), 3000);
+      setTimeout(() => navigate({ to: "/login" }), 3000);
     },
     onError: (error: Error) => {
       showToast({
