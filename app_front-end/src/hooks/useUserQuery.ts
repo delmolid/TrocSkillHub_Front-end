@@ -5,7 +5,12 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
-import { DeleteProfilUser, getUserById, updateProfilUser } from "../services/userService";
+import {
+  DeleteProfilUser,
+  getAllUsers,
+  getUserById,
+  updateProfilUser,
+} from "../services/userService";
 import type { UpdateProfilUserVariables } from "../types/auth.types";
 import { useToast, TOAST_SEVERITY } from "../context/ToastContext";
 
@@ -24,6 +29,14 @@ export function useUserQuery(userId: number) {
     queryKey: ["user", userId],
     queryFn: () => getUserById(userId),
     enabled: userId > 0,
+  });
+}
+
+export function useUsersQuery(enabled = true) {
+  return useQuery({
+    queryKey: ["users"],
+    queryFn: getAllUsers,
+    enabled,
   });
 }
 

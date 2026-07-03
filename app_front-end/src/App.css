@@ -7,7 +7,7 @@
 /* Do not reset form field padding (shadcn / Tailwind) */
 /* *:not(input):not(textarea):not(select):not(button) {
   padding: 0;
-} */ */
+} */
 
 :root {
   --color-primary: #176B87;

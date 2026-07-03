@@ -32,6 +32,11 @@ export function createComponentTestRouter(
       path: "/profile",
       component: Component,
     }),
+    createRoute({
+      getParentRoute: () => rootRoute,
+      path: "/dashboard",
+      component: Component,
+    }),
   ]);
 
   return createRouter({
