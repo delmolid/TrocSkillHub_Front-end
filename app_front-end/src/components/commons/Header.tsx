@@ -1,17 +1,29 @@
 import "../../styles/Header.css";
-import { useState } from "react";
-import { useLocation } from "@tanstack/react-router";
+import { useState, type FC } from "react";
+import { useLocation, useNavigate } from "@tanstack/react-router";
 import { useLogoutUser } from "@/hooks/useAuthQuery";
 
-export const Header: React.FC = () => {
+export const Header: FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
-  const isAuthPage = pathname === "/login";
+  const navigate = useNavigate();
+  const isAuthPage = pathname === "/" || pathname === "/login";
   const { mutate: logoutUser, isPending } = useLogoutUser();
 
   const handleLogout = () => {
     logoutUser();
   };
+
+  const goToDashboard = () => {
+    setMenuOpen(false);
+    navigate({ to: "/dashboard" });
+  };
+
+  const goToProfile = () => {
+    setMenuOpen(false);
+    navigate({ to: "/profile" });
+  };
+
   return (
     <nav className="navbar">
       <ul className="nav-left">
@@ -40,12 +52,12 @@ export const Header: React.FC = () => {
         <ul className="nav-center">
         {!isAuthPage && (
             <li>
-              <button >Tableau de bord</button>
+              <button onClick={goToDashboard}>Tableau de bord</button>
             </li>
           )}
           {!isAuthPage && (
             <li>
-              <button>Mon Profil</button>
+              <button onClick={goToProfile}>Mon Profil</button>
             </li>
           )}
         </ul>

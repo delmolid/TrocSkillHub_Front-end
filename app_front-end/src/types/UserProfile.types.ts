@@ -40,6 +40,10 @@ export interface ApiUser {
   firstName: string;
   lastName: string;
   email: string;
+  photo?: string | null;
+  avatarUrl?: string | null;
+  profilePicture?: string | null;
+  profilePictureUrl?: string | null;
   address?: string | null;
   city: string;
   country: string;
