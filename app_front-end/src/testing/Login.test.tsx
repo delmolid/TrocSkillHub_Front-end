@@ -3,6 +3,7 @@ import { render, cleanup } from "vitest-browser-react";
 import { page } from "vitest/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoginForm } from "../components/auth/LoginForm";
+import { ToastProvider } from "../context/ToastContext";
 import { ComponentTestRouter } from "./testRouter";
 
 beforeEach(() => {
@@ -16,13 +17,15 @@ const renderLoginForm = () => {
   });
   render(
     <QueryClientProvider client={queryClient}>
-      <ComponentTestRouter component={LoginForm} initialPath="/login" />
+      <ToastProvider>
+        <ComponentTestRouter component={LoginForm} initialPath="/login" />
+      </ToastProvider>
     </QueryClientProvider>,
   );
 };
 
 describe("LoginForm", () => {
-  test("affiche les erreurs de validation si le formulaire est vide", async () => {
+  test("shows validation errors when the form is empty", async () => {
     renderLoginForm();
 
     const submitButton = page.getByRole("button", { name: "Se connecter" });
@@ -32,7 +35,7 @@ describe("LoginForm", () => {
     await expect.element(page.getByText("Le mot de passe est requis")).toBeInTheDocument();
   });
 
-  test("affiche uniquement l'erreur mot de passe si l'email est rempli", async () => {
+  test("shows only the password error when the email is filled in", async () => {
     renderLoginForm();
 
     const emailInput = page.getByPlaceholder("Votre email");
@@ -45,7 +48,7 @@ describe("LoginForm", () => {
     await expect.element(page.getByText("Le mot de passe est requis")).toBeInTheDocument();
   });
 
-  test("appelle l'API login avec les bonnes données lors d'une soumission valide", async () => {
+  test("calls the login API with the correct data on a valid submission", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
       new Response(JSON.stringify({ message: "Connexion réussie" }), {
         status: 200,
