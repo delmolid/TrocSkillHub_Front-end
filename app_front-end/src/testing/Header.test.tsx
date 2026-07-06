@@ -22,26 +22,26 @@ const renderHeader = (initialPath = "/") => {
 };
 
 describe("Header", () => {
-  it("affiche le titre", async () => {
+  it("shows the title", async () => {
     renderHeader();
     await expect.element(page.getByText("TROCSKILL-HUB")).toBeInTheDocument();
   });
 
-  it("affiche le logo de l'application", async () => {
+  it("shows the application logo", async () => {
     renderHeader();
     const logo = page.getByRole("img", { name: "Logo TrocSkillHub" });
     await expect.element(logo).toBeInTheDocument();
     await expect.element(logo).toHaveAttribute("src", "/trocskillhub_logo.png");
   });
 
-  it("menu fermé par défaut", async () => {
+  it("menu is closed by default", async () => {
     renderHeader();
     await expect.element(page.getByRole("button", { name: "Menu" })).toBeInTheDocument();
     const navMenu = document.querySelector(".nav-menu");
     expect(navMenu?.classList.contains("active")).toBe(false);
   });
 
-  it("ouvre le menu au clic sur le bouton toggle", async () => {
+  it("opens the menu when clicking the toggle button", async () => {
     renderHeader();
     const toggleButton = page.getByRole("button", { name: "Menu" });
     await toggleButton.click();
@@ -49,7 +49,7 @@ describe("Header", () => {
     expect(navMenu?.classList.contains("active")).toBe(true);
   });
 
-  it("bascule le menu ouvert/fermé", async () => {
+  it("toggles the menu open/closed", async () => {
     renderHeader();
     const toggleButton = page.getByRole("button", { name: "Menu" });
 
@@ -60,20 +60,20 @@ describe("Header", () => {
     expect(document.querySelector(".nav-menu")?.classList.contains("active")).toBe(false);
   });
 
-  it("masque le bouton Déconnexion sur la page login", async () => {
+  it("hides the Déconnexion button on the login page", async () => {
     renderHeader("/login");
     await expect
       .element(page.getByRole("button", { name: "Déconnexion" }))
       .not.toBeInTheDocument();
   });
 
-  it("masque les liens de navigation sur la page login", async () => {
+  it("hides the navigation links on the login page", async () => {
     renderHeader("/login");
     await expect.element(page.getByText("Tableau de bord")).not.toBeInTheDocument();
     await expect.element(page.getByText("Mon Profil")).not.toBeInTheDocument();
   });
 
-  it("affiche les liens de navigation sur les autres pages", async () => {
+  it("shows the navigation links on other pages", async () => {
     renderHeader("/profile");
     await expect.element(page.getByText("Tableau de bord")).toBeInTheDocument();
     await expect.element(page.getByText("Mon Profil")).toBeInTheDocument();

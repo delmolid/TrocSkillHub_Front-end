@@ -64,3 +64,33 @@ export interface AuthMessageProps {
   variant: AuthMessageVariant;
   children: ReactNode;
 }
+
+export type PasswordResetStep = "email" | "code" | "newPassword" | "success";
+
+export interface PasswordResetRequestPayload {
+  email: string;
+}
+
+export interface PasswordResetVerifyPayload {
+  email: string;
+  code: string;
+}
+
+export interface PasswordResetPayload {
+  resetToken: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface PasswordResetEmailFields {
+  email: string;
+}
+
+export interface PasswordResetCodeFields {
+  code: string;
+}
+
+export interface PasswordResetNewPasswordFields {
+  newPassword: string;
+  confirmPassword: string;
+}
