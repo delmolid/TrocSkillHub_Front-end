@@ -8,12 +8,14 @@ import { Password } from "primereact/password";
 import { login as loginUser } from "../../services/authService";
 import type { LoginFields } from "../../types/auth.types";
 import { AuthMessage } from "./AuthMessage";
+import { PasswordResetModal } from "./PasswordResetModal";
 
 export const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isPasswordResetModalOpen, setIsPasswordResetModalOpen] = useState(false);
 
   const {
     control,
@@ -96,6 +98,14 @@ export const LoginForm: React.FC = () => {
             )}
           </div>
 
+          <button
+            type="button"
+            onClick={() => setIsPasswordResetModalOpen(true)}
+            className="self-end bg-transparent p-0 text-sm font-medium text-primary-border underline decoration-dotted"
+          >
+            Mot de passe oublié ?
+          </button>
+
           <Button
             type="submit"
             label={isLoading ? "Connexion..." : "Se connecter"}
@@ -104,6 +114,11 @@ export const LoginForm: React.FC = () => {
           />
         </div>
       </form>
+
+      <PasswordResetModal
+        visible={isPasswordResetModalOpen}
+        onHide={() => setIsPasswordResetModalOpen(false)}
+      />
     </div>
   );
 };
