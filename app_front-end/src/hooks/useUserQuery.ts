@@ -27,7 +27,7 @@ export const queryClient = new QueryClient({
 export function useUserQuery(userId: number) {
   return useQuery({
     queryKey: ["user", userId],
-    queryFn: () => getUserById(userId),
+    queryFn: () => getUserById(),
     enabled: userId > 0,
   });
 }
@@ -44,8 +44,8 @@ export function useUpdateProfilUser() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ userId, data }: UpdateProfilUserVariables) =>
-      updateProfilUser(userId, data),
+    mutationFn: ({ data }: UpdateProfilUserVariables) =>
+      updateProfilUser(data),
     onSuccess: (updatedUser, { userId }) => {
       queryClient.setQueryData(["user", userId], updatedUser);
       queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
@@ -59,8 +59,7 @@ export function useDeleteProfilUser() {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: ({ userId }: { userId: number }) =>
-      DeleteProfilUser(userId),
+    mutationFn: (_variables: { userId: number }) => DeleteProfilUser(),
     onSuccess: (_response, { userId }) => {
       queryClient.removeQueries({ queryKey: ["user", userId] });
       queryClient.invalidateQueries({ queryKey: ["auth", "me"] });

@@ -36,8 +36,9 @@ export const getAllUsers = async (): Promise<ApiUser[]> => {
   return data.map(normalizeUser);
 };
 
-export const getUserById = async (userId: number): Promise<ApiUser> => {
-  const response = await fetch(`${API_USERS_URL}/${userId}`, {
+
+export const getUserById = async (): Promise<ApiUser> => {
+  const response = await fetch(`${API_USERS_URL}/me`, {
     credentials: "include",
   });
 
@@ -50,10 +51,9 @@ export const getUserById = async (userId: number): Promise<ApiUser> => {
 };
 
 export const updateProfilUser = async (
-  userId: number,
   payload: UpdateProfilUserPayload,
 ): Promise<ApiUser> => {
-  const response = await fetch(`${API_USERS_URL}/${userId}`, {
+  const response = await fetch(`${API_USERS_URL}/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -76,10 +76,8 @@ export const updateProfilUser = async (
   return normalizeUser(data);
 };
 
-export const DeleteProfilUser = async (
-  userId: number,
-): Promise<void> => {
-  const response = await fetch(`${API_USERS_URL}/${userId}`, {
+export const DeleteProfilUser = async (): Promise<void> => {
+  const response = await fetch(`${API_USERS_URL}/me`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
