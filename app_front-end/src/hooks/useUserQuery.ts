@@ -24,11 +24,10 @@ export const queryClient = new QueryClient({
   },
 });
 
-export function useUserQuery(userId: number) {
+export function useUserQuery() {
   return useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user", "me"],
     queryFn: () => getUserById(),
-    enabled: userId > 0,
   });
 }
 
@@ -46,8 +45,8 @@ export function useUpdateProfilUser() {
   return useMutation({
     mutationFn: ({ data }: UpdateProfilUserVariables) =>
       updateProfilUser(data),
-    onSuccess: (updatedUser, { userId }) => {
-      queryClient.setQueryData(["user", userId], updatedUser);
+    onSuccess: (updatedUser) => {
+      queryClient.setQueryData(["user", "me"], updatedUser);
       queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
     },
   });
@@ -59,9 +58,9 @@ export function useDeleteProfilUser() {
   const navigate = useNavigate();
 
   return useMutation({
-    mutationFn: (_variables: { userId: number }) => DeleteProfilUser(),
-    onSuccess: (_response, { userId }) => {
-      queryClient.removeQueries({ queryKey: ["user", userId] });
+    mutationFn: () => DeleteProfilUser(),
+    onSuccess: () => {
+      queryClient.removeQueries({ queryKey: ["user", "me"] });
       queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
       showToast({
         severity: "success",

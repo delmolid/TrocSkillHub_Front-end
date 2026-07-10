@@ -28,10 +28,6 @@ export interface ProfileItemsEditorProps<T extends object> {
   onChange: (items: T[]) => void;
 }
 
-export interface ProfileMainProps {
-  userId: number;
-}
-
 export type ProfileSectionKey =
   | "identity"
   | "about"

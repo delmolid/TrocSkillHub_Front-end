@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import type { UpdateProfilUserPayload } from "./UserProfile.types";
 
 export interface CurrentUser {
-  id: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -40,14 +39,12 @@ export interface RegisterFields {
 
 export interface AuthContextValue {
   user: CurrentUser | undefined;
-  userId: number | undefined;
   isLoading: boolean;
   isError: boolean;
   error: Error | null;
 }
 
 export interface UpdateProfilUserVariables {
-  userId: number;
   data: UpdateProfilUserPayload;
 }
 

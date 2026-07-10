@@ -42,7 +42,6 @@ import type {
   ProjectItem,
 } from "../../types/UserProfile.types";
 import type {
-  ProfileMainProps,
   ProfileSectionKey,
   SectionCardProps,
   SectionEditState,
@@ -105,7 +104,7 @@ const TOOLTIP_OPTIONS = {
   ].join(" "),
 };
 
-const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
+const ProfileMain: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [sectionEdit, setSectionEdit] = useState<SectionEditState | null>(null);
   const [saveError, setSaveError] = useState<string | null>(null);
@@ -113,7 +112,7 @@ const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
 
   const activeSection = sectionEdit?.section ?? null;
 
-  const { data: user, isLoading, isError, error, refetch } = useUserQuery(userId);
+  const { data: user, isLoading, isError, error, refetch } = useUserQuery();
   const { mutate: updateProfil, isPending: isSaving } = useUpdateProfilUser();
   const {
     data: knowledges = [],
@@ -191,7 +190,7 @@ const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
   const saveSection = (data: Parameters<typeof updateProfil>[0]["data"]) => {
     setSaveError(null);
     updateProfil(
-      { userId, data },
+      { data },
       {
         onSuccess: () => closeEdit(),
         onError: (err) => {
@@ -290,7 +289,6 @@ const ProfileMain: React.FC<ProfileMainProps> = ({ userId }) => {
           onClick={() => setDeleteModalVisible(true)}
         />
         <ProfileDeleteModal
-          userId={userId}
           visible={deleteModalVisible}
           onHide={() => setDeleteModalVisible(false)}
         />

@@ -13,9 +13,9 @@ const DashboardState = ({ message }: { message: string }) => (
 );
 
 export function DashboardPage() {
-  const { userId, isLoading: authLoading, isError: authError } = useAuth();
+  const { user, isLoading: authLoading, isError: authError } = useAuth();
   const navigate = useNavigate();
-  const isAuthenticated = Boolean(userId);
+  const isAuthenticated = Boolean(user);
 
   const {
     data: users = [],
@@ -53,10 +53,10 @@ export function DashboardPage() {
 
     return (
       <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-        {users.map((user) => (
+        {users.map((member, index) => (
           <DashboardProfileCard
-            key={user.id ?? `${user.email}-${user.firstName}-${user.lastName}`}
-            user={user}
+            key={`${member.firstName}-${member.lastName}-${index}`}
+            user={member}
           />
         ))}
       </div>
