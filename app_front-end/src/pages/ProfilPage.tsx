@@ -6,7 +6,7 @@ import "../App.css";
 import { Header } from "../components/commons/Header";
 
 const ProfilPage: React.FC = () => {
-  const { userId, isLoading, isError } = useAuth();
+  const { user, isLoading, isError } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,14 +23,14 @@ const ProfilPage: React.FC = () => {
     );
   }
 
-  if (!userId) {
+  if (!user) {
     return null;
   }
 
   return (
     <div className="app">
       <Header />
-      <ProfileMain userId={userId} />
+      <ProfileMain />
 
       <footer className="app-footer">
         <div className="app-footer__content">

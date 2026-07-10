@@ -4,13 +4,11 @@ import { useDeleteProfilUser } from "@/hooks/useUserQuery";
 import { useToast, TOAST_SEVERITY } from "@/context/ToastContext";
 
 interface ProfileDeleteModalProps {
-  userId: number;
   visible: boolean;
   onHide: () => void;
 }
 
 export const ProfileDeleteModal: React.FC<ProfileDeleteModalProps> = ({
-  userId,
   visible,
   onHide,
 }) => {
@@ -19,7 +17,7 @@ export const ProfileDeleteModal: React.FC<ProfileDeleteModalProps> = ({
 
   const accept = () => {
     onHide();
-    deleteProfil({ userId });
+    deleteProfil();
   };
 
   const reject = () => {
