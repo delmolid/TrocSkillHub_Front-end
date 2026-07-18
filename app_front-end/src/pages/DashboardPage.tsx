@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import { Header } from "../components/commons/Header";
+import { Footer } from "../components/commons/Footer";
 import { DashboardProfileCard } from "../components/dashboard/DashboardProfileCard";
 import { useAuth } from "../context/AuthContext";
 import { useUsersQuery } from "../hooks/useUserQuery";
@@ -88,13 +89,7 @@ export function DashboardPage() {
         {renderContent()}
       </main>
 
-      <footer className="app-footer">
-        <div className="app-footer__content">
-          <p className="footer-copyright">
-            ©2026 Troc-SkillHub. Tous droits réservés
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
