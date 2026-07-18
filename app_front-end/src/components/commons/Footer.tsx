@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
             </button>
           </div>
           <p className="footer-copyright">
-            ©2026 Troc-SkillHub. Tous droits réservés
+            ©2026 Trocskillhub. Tous droits réservés
           </p>
         </div>
       </footer>
