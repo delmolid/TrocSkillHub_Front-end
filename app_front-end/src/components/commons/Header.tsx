@@ -34,7 +34,7 @@ export const Header: FC = () => {
         className="h-20 w-20 object-contain max-sm:h-8 max-sm:w-8"
       />
       <h1 className="font-heading text-xl font-bold text-[#70744f] max-md:text-base max-sm:text-sm">
-        TROCSKILL-HUB
+        TROCSKILLHUB
       </h1>
     </li>
   </ul>

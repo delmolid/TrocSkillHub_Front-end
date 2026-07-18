@@ -24,7 +24,7 @@ const renderHeader = (initialPath = "/") => {
 describe("Header", () => {
   it("shows the title", async () => {
     renderHeader();
-    await expect.element(page.getByText("TROCSKILL-HUB")).toBeInTheDocument();
+    await expect.element(page.getByText("TROCSKILLHUB")).toBeInTheDocument();
   });
 
   it("shows the application logo", async () => {
