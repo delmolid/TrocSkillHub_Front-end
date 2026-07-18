@@ -4,6 +4,7 @@ import ProfileMain from "../components/ProfilePageComponents/ProfileMain";
 import { useAuth } from "../context/AuthContext";
 import "../App.css";
 import { Header } from "../components/commons/Header";
+import { Footer } from "../components/commons/Footer";
 
 const ProfilPage: React.FC = () => {
   const { user, isLoading, isError } = useAuth();
@@ -32,18 +33,7 @@ const ProfilPage: React.FC = () => {
       <Header />
       <ProfileMain />
 
-      <footer className="app-footer">
-        <div className="app-footer__content">
-          <div className="footer-links">
-            <a href="#about">À Propos de Nous</a>
-            <a href="#contact">Contact</a>
-            <a href="#faq">FAQ</a>
-          </div>
-          <p className="footer-copyright">
-            ©2026 Troc-SkillHub. Tous droits réservés
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
