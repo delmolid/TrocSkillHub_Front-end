@@ -7,28 +7,33 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Charte graphique TrocSkillHub */
+  --color-primary: #87986f;
+  --color-secondary: #176b87;
+  --color-accent: #70744f;
+  --color-white: #fafbf9;
+  --color-text: #060605;
+
+  /* Alias utilisés dans l'app */
+  --color-page-bg: #fafbf9;
+  --color-primary-border: #176b87;
+  --color-primary-foreground: #fafbf9;
+  --color-secondary-foreground: #fafbf9;
+  --color-accent-foreground: #fafbf9;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-page-bg: #fafbf9;
-  --color-text: #060605;
-  --color-primary-dark: #006666;
-  --color-primary-border: #176b87;
 
   --font-heading: Inter, ui-sans-serif, system-ui, sans-serif;
   --font-body: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -47,24 +52,26 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
+
+  /* Charte graphique (source de vérité) */
+  --color-primary: #87986f;
+  --color-secondary: #176b87;
+  --color-accent: #70744f;
+  --color-white: #fafbf9;
+  --color-text: #060605;
+
+  --background: #fafbf9;
   --foreground: #060605;
-  --card: oklch(1 0 0);
+  --card: #fafbf9;
   --card-foreground: #060605;
-  --popover: oklch(1 0 0);
+  --popover: #fafbf9;
   --popover-foreground: #060605;
-  --primary: oklch(0.508 0.088 200.873);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: #060605;
-  --muted: oklch(0.968 0.007 247.896);
+  --muted: #fafbf9;
   --muted-foreground: #060605;
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: #060605;
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.508 0.088 200.873);
+  --border: #176b87;
+  --input: #176b87;
+  --ring: #176b87;
 }
 
 .dark {
@@ -91,9 +98,22 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
+
+  html {
+    @apply h-full scroll-smooth;
+    color-scheme: light;
+  }
+
+  #root {
+    @apply flex min-h-screen flex-col;
+  }
+
   body {
-    @apply bg-page-bg font-body text-base font-normal text-text;
+    @apply m-0 min-h-screen min-w-80 bg-white font-body text-base font-normal leading-relaxed text-text antialiased;
   }
 
   h1,
@@ -102,6 +122,47 @@
   h4,
   h5,
   h6 {
-    @apply font-heading font-bold;
+    @apply m-0 font-heading font-bold leading-tight text-text;
+  }
+
+  p {
+    @apply m-0 leading-relaxed;
+  }
+
+  a {
+    @apply font-medium text-secondary no-underline transition-colors hover:text-accent;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply rounded outline outline-2 outline-offset-2 outline-secondary;
+  }
+
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img {
+    @apply block h-auto max-w-full;
+  }
+
+  ul,
+  ol {
+    @apply m-0 list-none p-0;
+  }
+
+  ::selection {
+    @apply bg-primary text-white;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

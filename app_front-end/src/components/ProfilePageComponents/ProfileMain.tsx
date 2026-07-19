@@ -223,7 +223,7 @@ const ProfileMain: React.FC = () => {
           <button
             type="button"
             onClick={() => refetch()}
-            className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-dark"
+            className="rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-accent"
           >
             Réessayer
           </button>
@@ -259,7 +259,7 @@ const ProfileMain: React.FC = () => {
   ) : null;
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-350 flex-col gap-y-4 bg-page-bg px-5 py-8">
+    <main className="flex w-full min-h-screen flex-col gap-y-4 bg-page-bg px-5 py-8">
       <div className="flex justify-end gap-x-2">
         <Button
           type="button"
@@ -295,8 +295,8 @@ const ProfileMain: React.FC = () => {
        
       </div>
 
-      <div className="flex flex-col items-start gap-8 lg:flex-row">
-        <aside className="w-full shrink-0 lg:sticky lg:top-5 lg:w-[250px]">
+      <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:justify-start">
+        <aside className="w-full shrink-0 lg:sticky lg:top-5 lg:w-64">
           <EditableProfileCard
             isEditing={isEditing}
             isActive={isSectionActive("identity")}
@@ -388,7 +388,7 @@ const ProfileMain: React.FC = () => {
           </EditableProfileCard>
         </aside>
 
-        <section className="flex flex-1 flex-col gap-5">
+        <section className="flex min-w-0 flex-1 flex-col gap-5">
           <EditableProfileCard
             isEditing={isEditing}
             isActive={isSectionActive("about")}

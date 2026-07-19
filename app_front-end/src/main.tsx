@@ -6,6 +6,8 @@ import { PrimeReactProvider } from "primereact/api";
 import { queryClient } from "./hooks/useUserQuery";
 import { AuthProvider } from "./context/AuthContext";
 import { router } from "./router";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/700.css";
 import "primereact/resources/themes/lara-light-teal/theme.css";
 import "primeicons/primeicons.css";
 import "./styles/tailwind.css";

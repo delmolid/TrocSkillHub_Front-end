@@ -5,7 +5,6 @@ import { Footer } from "../components/commons/Footer";
 import { DashboardProfileCard } from "../components/dashboard/DashboardProfileCard";
 import { useAuth } from "../context/AuthContext";
 import { useUsersQuery } from "../hooks/useUserQuery";
-import "../App.css";
 
 const DashboardState = ({ message }: { message: string }) => (
   <div className="flex min-h-[320px] items-center justify-center rounded-2xl border border-primary-border/10 bg-white p-8 text-center shadow-sm">
@@ -69,7 +68,7 @@ export function DashboardPage() {
   }
 
   return (
-    <div className="app">
+    <div className="flex min-h-screen flex-col bg-white">
       <Header />
 
       <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-8 px-5 py-8 sm:px-8 lg:py-12">

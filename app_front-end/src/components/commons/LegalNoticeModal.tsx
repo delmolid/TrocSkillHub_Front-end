@@ -105,22 +105,22 @@ export const LegalNoticeModal: React.FC<LegalNoticeModalProps> = ({
       pt={{
         root: {
           className:
-            "rounded-xl shadow-xl border border-[#176b87]/20 bg-[#fafbf9] font-sans",
+            "rounded-xl shadow-xl border border-secondary/20 bg-white font-sans",
         },
         header: {
           className:
-            "flex items-center px-6 pt-5 pb-3 border-b border-[#176b87]/15",
+            "flex items-center px-6 pt-5 pb-3 border-b border-secondary/15",
         },
         headerTitle: {
-          className: "text-base font-bold text-[#060605]",
+          className: "text-base font-bold text-text",
         },
         content: {
           className:
-            "px-6 py-5 max-h-[70vh] overflow-y-auto text-sm leading-relaxed text-[#060605]",
+            "px-6 py-5 max-h-[70vh] overflow-y-auto text-sm leading-relaxed text-text",
         },
         closeButton: {
           className:
-            "ml-auto text-[#060605]/40 hover:text-[#060605] transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#176b87]",
+            "ml-auto text-text/40 hover:text-text transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary",
         },
       }}
     >

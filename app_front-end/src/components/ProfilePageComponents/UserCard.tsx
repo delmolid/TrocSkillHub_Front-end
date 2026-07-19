@@ -13,12 +13,12 @@ const UserCard: React.FC<UserCardData> = ({
   const nomComplet = `${prenom} ${nom}`;
 
   return (
-    <div className="flex max-w-[200px] flex-col items-center bg-white p-5 md:max-w-full">
-      <div className="mb-5 h-[150px] w-[150px] overflow-hidden rounded-full border-[6px] border-primary-border shadow-md md:h-[120px] md:w-[120px] md:border-4">
+    <div className="flex w-full flex-col items-start bg-white p-5">
+      <div className="mb-5 h-[120px] w-[120px] overflow-hidden rounded-full border-4 border-primary-border shadow-md">
       <VscAccount />
       </div>
 
-      <h2 className="mb-4 text-center text-lg font-semibold text-text">
+      <h2 className="mb-4 text-left text-lg font-semibold text-text">
         {nomComplet}
       </h2>
 
