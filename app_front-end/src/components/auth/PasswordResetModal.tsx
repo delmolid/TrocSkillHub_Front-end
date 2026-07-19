@@ -155,11 +155,11 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
       style={{ width: "28rem" }}
       breakpoints={{ "960px": "90vw" }}
       pt={{
-        root: { className: "rounded-xl shadow-xl border border-[#176b87]/20 bg-[#fafbf9] font-sans" },
-        header: { className: "flex items-center px-6 pt-10 pb-3 border-b border-[#176b87]/15" },
-        headerTitle: { className: "text-base font-bold text-[#060605]" },
+        root: { className: "rounded-xl shadow-xl border border-secondary/20 bg-white font-sans" },
+        header: { className: "flex items-center px-6 pt-10 pb-3 border-b border-secondary/15" },
+        headerTitle: { className: "text-base font-bold text-text" },
         content: { className: "px-6 py-5" },
-        closeButton: { className: "ml-auto text-[#060605]/40 hover:text-[#060605] transition-opacity" },
+        closeButton: { className: "ml-auto text-text/40 hover:text-text transition-opacity" },
       }}
     >
       {step === "email" && (

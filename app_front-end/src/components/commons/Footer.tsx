@@ -6,18 +6,18 @@ export const Footer: React.FC = () => {
 
   return (
     <>
-      <footer className="app-footer">
-        <div className="app-footer__content">
-          <div className="footer-links">
+      <footer className="mt-auto bg-secondary px-5 py-8 text-white">
+        <div className="mx-auto w-full max-w-7xl text-center">
+          <div className="mb-4 flex flex-wrap justify-center gap-8 max-md:flex-col max-md:gap-2.5">
             <button
               type="button"
-              className="footer-link-button"
+              className="cursor-pointer border-0 bg-transparent p-0 font-inherit text-sm text-white transition-opacity hover:opacity-70 focus-visible:rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white max-md:text-[13px]"
               onClick={() => setIsLegalNoticeOpen(true)}
             >
               Mentions légales
             </button>
           </div>
-          <p className="footer-copyright">
+          <p className="m-0 text-[13px] text-white/70 max-md:text-xs">
             ©2026 Trocskillhub. Tous droits réservés
           </p>
         </div>

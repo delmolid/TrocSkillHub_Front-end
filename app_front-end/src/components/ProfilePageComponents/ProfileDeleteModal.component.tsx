@@ -44,16 +44,16 @@ export const ProfileDeleteModal: React.FC<ProfileDeleteModalProps> = ({
       style={{ width: "50vw" }}
       breakpoints={{ "1100px": "75vw", "960px": "100vw" }}
       pt={{
-        root:        { className: "rounded-xl shadow-xl border border-[#176b87]/20 bg-[#fafbf9] font-sans" },
-        header:      { className: "flex items-center px-6 pt-5 pb-3 border-b border-[#176b87]/15" },
-        headerTitle: { className: "text-base font-bold text-[#060605]" },
-        content:     { className: "flex items-start gap-3 px-6 py-5 text-sm text-[#060605]" },
-        icon:        { className: "text-[#70744f] text-xl shrink-0" },
+        root:        { className: "rounded-xl shadow-xl border border-secondary/20 bg-white font-sans" },
+        header:      { className: "flex items-center px-6 pt-5 pb-3 border-b border-secondary/15" },
+        headerTitle: { className: "text-base font-bold text-text" },
+        content:     { className: "flex items-start gap-3 px-6 py-5 text-sm text-text" },
+        icon:        { className: "text-accent text-xl shrink-0" },
         message:     { className: "leading-relaxed" },
         footer:      { className: "flex justify-end gap-2 px-6 pb-5 pt-2" },
-        acceptButton: { className: "px-4 py-2 rounded-full bg-[#70744f]/20 text-white text-sm font-bold hover:bg-red-400" },
-        rejectButton: { className: "px-4 py-2 rounded-full bg-[#70744f]/10 text-[#70744f] text-sm font-medium" },
-        closeButton:  { className: "ml-auto text-[#060605]/40 hover:text-[#060605] transition-opacity" },
+        acceptButton: { className: "px-4 py-2 rounded-full bg-accent/20 text-white text-sm font-bold hover:bg-red-400" },
+        rejectButton: { className: "px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium" },
+        closeButton:  { className: "ml-auto text-text/40 hover:text-text transition-opacity" },
       }}
     />
   );

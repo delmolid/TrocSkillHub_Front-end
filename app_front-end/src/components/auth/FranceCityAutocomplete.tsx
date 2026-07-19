@@ -87,7 +87,7 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
               <li key={suggestion.code} role="option">
                 <button
                   type="button"
-                  className="w-full px-4 py-2 text-left text-sm text-text hover:bg-[#fafbf9]"
+                  className="w-full px-4 py-2 text-left text-sm text-text hover:bg-white"
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => handleSelect(suggestion)}
                 >

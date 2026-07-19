@@ -10,9 +10,9 @@ const ToastContext = createContext<ToastContextValue | null>(null);
 const TOAST_BASE = "rounded-lg border-l-4 shadow-md font-sans";
 
 export const TOAST_SEVERITY = {
-  success: `${TOAST_BASE} bg-[#87986f]/20 border-[#87986f]`,
-  info:    `${TOAST_BASE} bg-[#176b87]/10 border-[#176b87]`,
-  warn:    `${TOAST_BASE} bg-[#70744f]/10 border-[#70744f]`,
+  success: `${TOAST_BASE} bg-primary/20 border-primary`,
+  info:    `${TOAST_BASE} bg-secondary/10 border-secondary`,
+  warn:    `${TOAST_BASE} bg-accent/10 border-accent`,
   error:   `${TOAST_BASE} bg-red-600/10 border-red-600`,
 };
 
@@ -28,9 +28,9 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       <Toast
         ref={toastRef}
         pt={{
-          summary:     { className: "font-bold text-base text-[#060605]" },
-          detail:      { className: "text-xs text-[#060605]/80 mt-0.5" },
-          closeButton: { className: "text-[#060605]/40 hover:text-[#060605] transition-opacity ml-auto" },
+          summary:     { className: "font-bold text-base text-text" },
+          detail:      { className: "text-xs text-text/80 mt-0.5" },
+          closeButton: { className: "text-text/40 hover:text-text transition-opacity ml-auto" },
         }}
       />
       {children}
