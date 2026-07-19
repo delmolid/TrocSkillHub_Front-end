@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import ProfileMain from "../components/ProfilePageComponents/ProfileMain";
 import { useAuth } from "../context/AuthContext";
-import "../App.css";
 import { Header } from "../components/commons/Header";
 import { Footer } from "../components/commons/Footer";
 
@@ -29,10 +28,9 @@ const ProfilPage: React.FC = () => {
   }
 
   return (
-    <div className="app">
+    <div className="flex min-h-screen flex-col bg-white">
       <Header />
       <ProfileMain />
-
       <Footer />
     </div>
   );

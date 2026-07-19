@@ -4,14 +4,14 @@ import { RegisterForm } from "./auth/RegisterForm";
 
 export const AuthentificationForm: React.FC = () => {
   return (
-    <div className="flex w-full flex-1 flex-col bg-page-bg">
+    <div className="flex w-full flex-1 flex-col bg-white">
       <header className="flex w-full justify-center px-5 pt-8 sm:px-8">
         <div className="w-full max-w-3xl text-center">
           <h1 className="mb-3 font-heading text-3xl font-bold tracking-tight text-text sm:text-4xl">
             Bienvenue sur{" "}
-            <span className="text-[#70744f]">TROCSKILLHUB</span>
+            <span className="text-accent">TROCSKILLHUB</span>
           </h1>
-          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="text-base leading-relaxed text-text/70 sm:text-lg">
             Rejoignez une communauté où chacun partage ses compétences et ses
             besoins. Inscrivez-vous pour explorer les profils et proposer ou
             recevoir des échanges de compétences.
@@ -23,11 +23,11 @@ export const AuthentificationForm: React.FC = () => {
         <RegisterForm />
 
         <div className="flex h-[300px] flex-col items-center justify-center gap-3 px-6 max-lg:mx-auto max-lg:h-auto max-lg:w-full max-lg:max-w-[420px] max-lg:flex-row max-lg:px-0 max-lg:py-2">
-          <div className="w-px flex-1 bg-[#b4cfe0] max-lg:h-px max-lg:w-auto" />
+          <div className="w-px flex-1 bg-secondary/30 max-lg:h-px max-lg:w-auto" />
           <span className="font-body text-sm font-bold uppercase tracking-[0.1em] text-text">
             ou
           </span>
-          <div className="w-px flex-1 bg-[#b4cfe0] max-lg:h-px max-lg:w-auto" />
+          <div className="w-px flex-1 bg-secondary/30 max-lg:h-px max-lg:w-auto" />
         </div>
 
         <LoginForm />

@@ -1,20 +1,20 @@
-/* Design tokens TrocSkillHub */
+/* Design tokens TrocSkillHub — alignés sur la charte (:root / Tailwind) */
 :root {
   --ts-font-heading: Inter, ui-sans-serif, system-ui, sans-serif;
   --ts-font-body: Inter, ui-sans-serif, system-ui, sans-serif;
-  --ts-text: #060605;
-  --ts-page-bg: #fafbf9;
+  --ts-text: var(--color-text);
+  --ts-page-bg: var(--color-white);
   --ts-form-bg: #ffffff;
   --ts-form-block-bg: rgb(180 200 202 / 22%);
-  --ts-primary: #87986f;
-  --ts-accent: #70744f;
+  --ts-primary: var(--color-primary);
+  --ts-accent: var(--color-accent);
   --ts-secondary: #b4c8ca;
   --ts-input-bg: #ffffff;
-  --ts-input-border: #176b87;
-  --ts-input-border-hover: #70744f;
+  --ts-input-border: var(--color-secondary);
+  --ts-input-border-hover: var(--color-accent);
   --ts-focus-ring: rgb(23 107 135 / 22%);
   --ts-selected-bg: rgb(135 152 111 / 18%);
-  --ts-selected-text: #060605;
+  --ts-selected-text: var(--color-text);
   --ts-radius: 0.5rem;
   --ts-text-sm: 0.75rem;
   --ts-text-base: 1rem;
