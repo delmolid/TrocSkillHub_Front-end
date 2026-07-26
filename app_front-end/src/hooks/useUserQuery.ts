@@ -7,6 +7,7 @@ import {
 import { useNavigate } from "@tanstack/react-router";
 import {
   DeleteProfilUser,
+  exportProfileDocument,
   getAllUsers,
   getUserById,
   updateProfilUser,
@@ -77,6 +78,36 @@ export function useDeleteProfilUser() {
         summary: "Erreur",
         detail: error.message ?? "Une erreur est survenue.",
         life: 4000,
+        className: TOAST_SEVERITY.error,
+        contentClassName: "flex items-center gap-3 px-3.5 py-3",
+      });
+    },
+  });
+}
+
+export function useExportProfileDocument() {
+  const { showToast } = useToast();
+
+  return useMutation({
+    mutationFn: () => exportProfileDocument(),
+    onSuccess: (message) => {
+      showToast({
+        severity: "success",
+        summary: "Export réussi",
+        detail: message,
+        life: 4000,
+        className: TOAST_SEVERITY.success,
+        contentClassName: "flex items-center gap-3 px-3.5 py-3",
+      });
+    },
+    onError: (error: Error) => {
+      showToast({
+        severity: "error",
+        summary: "Erreur d'export",
+        detail:
+          error.message ??
+          "Impossible d'exporter votre profil. Veuillez réessayer.",
+        life: 5000,
         className: TOAST_SEVERITY.error,
         contentClassName: "flex items-center gap-3 px-3.5 py-3",
       });

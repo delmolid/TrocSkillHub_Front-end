@@ -20,7 +20,7 @@ import type {
 } from "../../types/auth.types";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const CODE_PATTERN = /^\d{4}$/;
+const CODE_PATTERN = /^\d{6}$/;
 const RESEND_COOLDOWN_SECONDS = 30;
 
 const STEP_HEADERS: Record<PasswordResetStep, string> = {
@@ -170,7 +170,7 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
           style={{ padding: "clamp(15px, 2.5vw, 32px)" }}
         >
           <p className="m-0 text-sm text-text">
-            Saisissez votre adresse email : si un compte existe, un code de vérification à 4
+            Saisissez votre adresse email : si un compte existe, un code de vérification à 6
             chiffres vous sera envoyé.
           </p>
 
@@ -210,7 +210,7 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
           style={{ padding: "clamp(15px, 2.5vw, 32px)" }}
         >
           <p className="m-0 text-sm text-text">
-            {"Saisissez le code à 4 chiffres reçu par email à l'adresse "}
+            {"Saisissez le code à 6 chiffres reçu par email à l'adresse "}
             <strong>{email}</strong>.
           </p>
 
@@ -220,14 +220,14 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
               control={codeForm.control}
               rules={{
                 required: "Le code est requis",
-                pattern: { value: CODE_PATTERN, message: "Le code doit contenir exactement 4 chiffres" },
+                pattern: { value: CODE_PATTERN, message: "Le code doit contenir exactement 6 chiffres" },
               }}
               render={({ field }) => (
                 <InputOtp
                   value={field.value ?? ""}
                   onChange={(e) => field.onChange(String(e.value ?? ""))}
                   onBlur={field.onBlur}
-                  length={4}
+                  length={6}
                   integerOnly
                   invalid={!!codeForm.formState.errors.code}
                 />
