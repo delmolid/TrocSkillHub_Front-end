@@ -7,7 +7,11 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { InputTextarea } from "primereact/inputtextarea";
 import { useKnowledgesQuery } from "../../hooks/useKnowledgesQuery";
-import { useUpdateProfilUser, useUserQuery } from "../../hooks/useUserQuery";
+import {
+  useExportProfileDocument,
+  useUpdateProfilUser,
+  useUserQuery,
+} from "../../hooks/useUserQuery";
 import { mapApiUserToUserCard, getUserDescription } from "../../utils/userMapper";
 import 'primeicons/primeicons.css';
 import {
@@ -114,6 +118,10 @@ const ProfileMain: React.FC = () => {
 
   const { data: user, isLoading, isError, error, refetch } = useUserQuery();
   const { mutate: updateProfil, isPending: isSaving } = useUpdateProfilUser();
+  const {
+    mutate: exportProfile,
+    isPending: isExporting,
+  } = useExportProfileDocument();
   const {
     data: knowledges = [],
     isLoading: knowledgesLoading,
@@ -263,11 +271,23 @@ const ProfileMain: React.FC = () => {
       <div className="flex justify-end gap-x-2">
         <Button
           type="button"
+          icon="pi pi-file-export"
+          label="Exporter mon profil"
+          className="ts-btn-profile ts-btn-secondary"
+          tooltip="Recevoir mon profil en PDF par email"
+          tooltipOptions={TOOLTIP_OPTIONS}
+          loading={isExporting}
+          disabled={isExporting}
+          onClick={() => exportProfile()}
+        />
+
+        <Button
+          type="button"
           icon="pi pi-user-edit"
           severity={isEditing ? "secondary" : undefined}
           outlined={isEditing}
           className="ts-btn-profile ts-btn-secondary"
-          tooltip={isEditing ? "Terminer" : "Modifier"}
+          tooltip={isEditing ? "Terminer" : "modifier"}
           tooltipOptions={TOOLTIP_OPTIONS}
           onClick={() => {
             if (isEditing) {
