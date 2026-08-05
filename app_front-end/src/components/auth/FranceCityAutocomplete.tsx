@@ -10,6 +10,8 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
   onChange,
   onBlur,
   disabled = false,
+  id,
+  "aria-labelledby": ariaLabelledBy,
 }) => {
   const listId = useId();
   const [inputValue, setInputValue] = useState(value);
@@ -35,13 +37,16 @@ export const FranceCityAutocomplete: React.FC<FranceCityAutocompleteProps> = ({
   return (
     <div className="relative flex flex-col gap-1">
       <InputText
+        id={id}
         value={inputValue}
         disabled={disabled}
         placeholder="Commune (ex. Paris, 75001…)"
-        autoComplete="off"
+        autoComplete="address-level2"
         role="combobox"
+        aria-labelledby={ariaLabelledBy}
         aria-expanded={isOpen}
         aria-controls={listId}
+        aria-autocomplete="list"
         onFocus={() => setIsOpen(true)}
         onBlur={() => {
           onBlur?.();

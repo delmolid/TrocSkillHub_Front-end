@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
               Mentions légales
             </button>
           </div>
-          <p className="m-0 text-[13px] text-white/70 max-md:text-xs">
+          <p className="m-0 text-[13px] text-white max-md:text-xs">
             ©2026 Trocskillhub. Tous droits réservés
           </p>
         </div>

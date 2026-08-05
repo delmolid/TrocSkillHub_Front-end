@@ -11,6 +11,15 @@ import type { RegisterFields } from "../../types/auth.types";
 import { AuthMessage } from "./AuthMessage";
 import { FranceCityAutocomplete } from "./FranceCityAutocomplete";
 
+const passwordTogglePt = {
+  showIcon: {
+    "aria-label": "Afficher le mot de passe",
+  },
+  hideIcon: {
+    "aria-label": "Masquer le mot de passe",
+  },
+};
+
 export const RegisterForm: React.FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -87,12 +96,20 @@ export const RegisterForm: React.FC = () => {
         >
           <div className="flex gap-3 max-md:flex-col">
             <div className="flex flex-1 flex-col gap-1">
+              <label htmlFor="register-nom" className="auth-field-label">
+                Nom
+              </label>
               <Controller
                 name="nom"
                 control={control}
                 rules={{ required: "Le nom est requis" }}
                 render={({ field }) => (
-                  <InputText {...field} placeholder="Votre nom" />
+                  <InputText
+                    {...field}
+                    id="register-nom"
+                    placeholder="Votre nom"
+                    autoComplete="family-name"
+                  />
                 )}
               />
               {errors.nom && (
@@ -100,12 +117,20 @@ export const RegisterForm: React.FC = () => {
               )}
             </div>
             <div className="flex flex-1 flex-col gap-1">
+              <label htmlFor="register-prenom" className="auth-field-label">
+                Prénom
+              </label>
               <Controller
                 name="prenom"
                 control={control}
                 rules={{ required: "Le prénom est requis" }}
                 render={({ field }) => (
-                  <InputText {...field} placeholder="Votre prénom" />
+                  <InputText
+                    {...field}
+                    id="register-prenom"
+                    placeholder="Votre prénom"
+                    autoComplete="given-name"
+                  />
                 )}
               />
               {errors.prenom && (
@@ -115,6 +140,9 @@ export const RegisterForm: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="register-email" className="auth-field-label">
+              Adresse email
+            </label>
             <Controller
               name="email"
               control={control}
@@ -128,8 +156,10 @@ export const RegisterForm: React.FC = () => {
               render={({ field }) => (
                 <InputText
                   {...field}
+                  id="register-email"
                   placeholder="Votre adresse email"
                   type="email"
+                  autoComplete="email"
                 />
               )}
             />
@@ -139,12 +169,17 @@ export const RegisterForm: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="register-city" id="register-city-label" className="auth-field-label">
+              Ville
+            </label>
             <Controller
               name="city"
               control={control}
               rules={{ required: "La ville est requise" }}
               render={({ field }) => (
                 <FranceCityAutocomplete
+                  id="register-city"
+                  aria-labelledby="register-city-label"
                   value={field.value}
                   onChange={field.onChange}
                   onBlur={field.onBlur}
@@ -157,6 +192,9 @@ export const RegisterForm: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="register-password" className="auth-field-label">
+              Mot de passe
+            </label>
             <Controller
               name="password"
               control={control}
@@ -183,6 +221,7 @@ export const RegisterForm: React.FC = () => {
               }}
               render={({ field }) => (
                 <Password
+                  inputId="register-password"
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                   onBlur={field.onBlur}
@@ -190,6 +229,8 @@ export const RegisterForm: React.FC = () => {
                   toggleMask
                   feedback={false}
                   className="w-full"
+                  autoComplete="new-password"
+                  pt={passwordTogglePt}
                 />
               )}
             />
@@ -199,6 +240,9 @@ export const RegisterForm: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="register-confirm-password" className="auth-field-label">
+              Confirmer le mot de passe
+            </label>
             <Controller
               name="confirmPassword"
               control={control}
@@ -209,6 +253,7 @@ export const RegisterForm: React.FC = () => {
               }}
               render={({ field }) => (
                 <Password
+                  inputId="register-confirm-password"
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                   onBlur={field.onBlur}
@@ -216,6 +261,8 @@ export const RegisterForm: React.FC = () => {
                   toggleMask
                   feedback={false}
                   className="w-full"
+                  autoComplete="new-password"
+                  pt={passwordTogglePt}
                 />
               )}
             />

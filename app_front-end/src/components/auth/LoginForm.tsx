@@ -63,12 +63,21 @@ export const LoginForm: React.FC = () => {
           style={{ padding: "clamp(15px, 2.5vw, 32px)" }}
         >
           <div className="flex flex-col gap-1">
+            <label htmlFor="login-email" className="auth-field-label">
+              Adresse email
+            </label>
             <Controller
               name="email"
               control={control}
               rules={{ required: "L'adresse email est requise" }}
               render={({ field }) => (
-                <InputText {...field} placeholder="Votre email" type="email" />
+                <InputText
+                  {...field}
+                  id="login-email"
+                  placeholder="Votre email"
+                  type="email"
+                  autoComplete="email"
+                />
               )}
             />
             {errors.email && (
@@ -77,12 +86,16 @@ export const LoginForm: React.FC = () => {
           </div>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="login-password" className="auth-field-label">
+              Mot de passe
+            </label>
             <Controller
               name="password"
               control={control}
               rules={{ required: "Le mot de passe est requis" }}
               render={({ field }) => (
                 <Password
+                  inputId="login-password"
                   value={field.value}
                   onChange={(e) => field.onChange(e.target.value)}
                   onBlur={field.onBlur}
@@ -90,6 +103,15 @@ export const LoginForm: React.FC = () => {
                   toggleMask
                   feedback={false}
                   className="w-full"
+                  autoComplete="current-password"
+                  pt={{
+                    showIcon: {
+                      "aria-label": "Afficher le mot de passe",
+                    },
+                    hideIcon: {
+                      "aria-label": "Masquer le mot de passe",
+                    },
+                  }}
                 />
               )}
             />

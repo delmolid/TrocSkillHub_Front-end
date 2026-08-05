@@ -2,6 +2,7 @@ import { API_USERS_URL } from '../constantes';
 import {
   ApiUser,
   type needs,
+  type PublicUserProfile,
   type RawKnowledgeItem,
   type skills,
   type UpdateProfilUserPayload,
@@ -23,7 +24,16 @@ const normalizeUser = (user: ApiUser): ApiUser => ({
   project: user.project ?? null,
 });
 
-export const getAllUsers = async (): Promise<ApiUser[]> => {
+const normalizePublicUser = (user: PublicUserProfile): PublicUserProfile => ({
+  firstName: user.firstName,
+  lastName: user.lastName,
+  city: user.city,
+  country: user.country,
+  skills: (user.skills ?? []).map(normalizeKnowledgeItem),
+  needs: (user.needs ?? []).map(normalizeKnowledgeItem),
+});
+
+export const getAllUsers = async (): Promise<PublicUserProfile[]> => {
   const response = await fetch(`${API_USERS_URL}`, {
     credentials: "include",
   });
@@ -32,8 +42,8 @@ export const getAllUsers = async (): Promise<ApiUser[]> => {
     throw new Error(`Erreur HTTP: ${response.status}`);
   }
 
-  const data: ApiUser[] = await response.json();
-  return data.map(normalizeUser);
+  const data: PublicUserProfile[] = await response.json();
+  return data.map(normalizePublicUser);
 };
 
 

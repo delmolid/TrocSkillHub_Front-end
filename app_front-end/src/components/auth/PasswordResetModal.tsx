@@ -175,6 +175,9 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
           </p>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="reset-email" className="auth-field-label">
+              Adresse email
+            </label>
             <Controller
               name="email"
               control={emailForm.control}
@@ -183,7 +186,13 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
                 pattern: { value: EMAIL_PATTERN, message: "Email invalide" },
               }}
               render={({ field }) => (
-                <InputText {...field} placeholder="Votre email" type="email" />
+                <InputText
+                  {...field}
+                  id="reset-email"
+                  placeholder="Votre email"
+                  type="email"
+                  autoComplete="email"
+                />
               )}
             />
             {emailForm.formState.errors.email && (
@@ -215,6 +224,9 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
           </p>
 
           <div className="flex flex-col items-center gap-1">
+            <label htmlFor="reset-code" id="reset-code-label" className="auth-field-label self-start">
+              Code de vérification
+            </label>
             <Controller
               name="code"
               control={codeForm.control}
@@ -224,12 +236,14 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
               }}
               render={({ field }) => (
                 <InputOtp
+                  id="reset-code"
                   value={field.value ?? ""}
                   onChange={(e) => field.onChange(String(e.value ?? ""))}
                   onBlur={field.onBlur}
                   length={6}
                   integerOnly
                   invalid={!!codeForm.formState.errors.code}
+                  aria-labelledby="reset-code-label"
                 />
               )}
             />
@@ -276,6 +290,9 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
           </p>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="reset-new-password" className="auth-field-label">
+              Nouveau mot de passe
+            </label>
             <Controller
               name="newPassword"
               control={newPasswordForm.control}
@@ -285,6 +302,7 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
               }}
               render={({ field }) => (
                 <Password
+                  inputId="reset-new-password"
                   value={field.value ?? ""}
                   onChange={(e) => field.onChange(e.target.value)}
                   onBlur={field.onBlur}
@@ -292,6 +310,11 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
                   toggleMask
                   feedback={false}
                   className="w-full"
+                  autoComplete="new-password"
+                  pt={{
+                    showIcon: { "aria-label": "Afficher le mot de passe" },
+                    hideIcon: { "aria-label": "Masquer le mot de passe" },
+                  }}
                 />
               )}
             />
@@ -303,6 +326,9 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
           </div>
 
           <div className="flex flex-col gap-1">
+            <label htmlFor="reset-confirm-password" className="auth-field-label">
+              Confirmer le mot de passe
+            </label>
             <Controller
               name="confirmPassword"
               control={newPasswordForm.control}
@@ -312,6 +338,7 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
               }}
               render={({ field }) => (
                 <Password
+                  inputId="reset-confirm-password"
                   value={field.value ?? ""}
                   onChange={(e) => field.onChange(e.target.value)}
                   onBlur={field.onBlur}
@@ -319,6 +346,11 @@ export const PasswordResetModal: React.FC<PasswordResetModalProps> = ({
                   toggleMask
                   feedback={false}
                   className="w-full"
+                  autoComplete="new-password"
+                  pt={{
+                    showIcon: { "aria-label": "Afficher le mot de passe" },
+                    hideIcon: { "aria-label": "Masquer le mot de passe" },
+                  }}
                 />
               )}
             />

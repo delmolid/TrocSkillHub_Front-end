@@ -346,7 +346,8 @@
   border-radius: var(--ts-radius);
 }
 
-.profile-field-label {
+.profile-field-label,
+.auth-field-label {
   display: block;
   font-family: var(--ts-font-body);
   font-size: var(--ts-text-sm);

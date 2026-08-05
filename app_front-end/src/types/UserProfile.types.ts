@@ -35,6 +35,16 @@ export type ProfileSectionData =
   | ProjectItem[]
   | null;
 
+/** Public listing payload from GET /users (UserPublicResponseDTO). */
+export interface PublicUserProfile {
+  firstName: string;
+  lastName: string;
+  city: string;
+  country: string;
+  skills: skills[];
+  needs: needs[];
+}
+
 export interface ApiUser {
   id?: number;
   firstName: string;
