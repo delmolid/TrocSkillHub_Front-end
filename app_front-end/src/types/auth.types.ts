@@ -53,6 +53,8 @@ export type FranceCityAutocompleteProps = {
   onChange: (city: string) => void;
   onBlur?: () => void;
   disabled?: boolean;
+  id?: string;
+  "aria-labelledby"?: string;
 };
 
 export type AuthMessageVariant = "error" | "success";
