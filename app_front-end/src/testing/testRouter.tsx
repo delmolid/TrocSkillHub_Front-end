@@ -34,7 +34,7 @@ export function createComponentTestRouter(
     }),
     createRoute({
       getParentRoute: () => rootRoute,
-      path: "/dashboard",
+      path: "/catalog",
       component: Component,
     }),
   ]);

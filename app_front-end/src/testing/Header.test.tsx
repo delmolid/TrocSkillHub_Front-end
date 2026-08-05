@@ -69,13 +69,13 @@ describe("Header", () => {
 
   it("hides the navigation links on the login page", async () => {
     renderHeader("/login");
-    await expect.element(page.getByText("Tableau de bord")).not.toBeInTheDocument();
+    await expect.element(page.getByText("Catalogue")).not.toBeInTheDocument();
     await expect.element(page.getByText("Mon Profil")).not.toBeInTheDocument();
   });
 
   it("shows the navigation links on other pages", async () => {
     renderHeader("/profile");
-    await expect.element(page.getByText("Tableau de bord")).toBeInTheDocument();
+    await expect.element(page.getByText("Catalogue")).toBeInTheDocument();
     await expect.element(page.getByText("Mon Profil")).toBeInTheDocument();
   });
 });

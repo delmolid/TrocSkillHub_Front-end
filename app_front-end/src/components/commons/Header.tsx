@@ -17,9 +17,9 @@ export const Header: FC = () => {
     logoutUser();
   };
 
-  const goToDashboard = () => {
+  const goToCatalog = () => {
     setMenuOpen(false);
-    navigate({ to: "/dashboard" });
+    navigate({ to: "/catalog" });
   };
 
   const goToProfile = () => {
@@ -67,8 +67,8 @@ export const Header: FC = () => {
         <ul className="m-0 flex list-none items-center gap-10 p-0 max-md:w-full max-md:flex-col max-md:gap-3 md:gap-8 lg:gap-10">
           {!isAuthPage && (
             <li className="w-full md:w-auto">
-              <button type="button" className={navLinkClassName} onClick={goToDashboard}>
-                Tableau de bord
+              <button type="button" className={navLinkClassName} onClick={goToCatalog}>
+                Catalogue
               </button>
             </li>
           )}

@@ -37,7 +37,7 @@ const KnowledgeBadges = ({
   );
 };
 
-export function DashboardProfileCard({ user }: { user: PublicUserProfile }) {
+export function CatalogProfileCard({ user }: { user: PublicUserProfile }) {
   const fullName = `${user.firstName} ${user.lastName}`.trim();
   const location = [user.city, user.country].filter(Boolean).join(", ");
 
@@ -85,6 +85,3 @@ export function DashboardProfileCard({ user }: { user: PublicUserProfile }) {
     </Card>
   );
 }
-
-
-
