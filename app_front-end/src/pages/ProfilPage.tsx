@@ -10,10 +10,11 @@ const ProfilPage: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && isError) {
+    // Avoid bouncing to login while auth is still resolving after a session switch.
+    if (!isLoading && isError && !user) {
       navigate({ to: "/login" });
     }
-  }, [isLoading, isError, navigate]);
+  }, [isLoading, isError, user, navigate]);
 
   if (isLoading) {
     return (

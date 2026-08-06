@@ -4,16 +4,16 @@ import type {
   PasswordResetRequestPayload,
   PasswordResetVerifyPayload,
 } from "../types/auth.types";
+import { apiFetch } from "./apiFetch";
 
 const DEFAULT_ERROR_MESSAGE = "Une erreur est survenue. Veuillez réessayer.";
 
 async function postPasswordReset(path: string, body: unknown): Promise<string> {
-  const response = await fetch(`${API_PASSWORD_RESET_URL}${path}`, {
+  const response = await apiFetch(`${API_PASSWORD_RESET_URL}${path}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
     body: JSON.stringify(body),
   });
 

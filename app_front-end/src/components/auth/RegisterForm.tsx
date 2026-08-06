@@ -6,7 +6,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { FRANCE } from "../../constantes";
-import { login as loginUser, register as registerUser } from "../../services/authService";
+import { getCurrentUser, register as registerUser } from "../../services/authService";
 import type { RegisterFields } from "../../types/auth.types";
 import { AuthMessage } from "./AuthMessage";
 import { FranceCityAutocomplete } from "./FranceCityAutocomplete";
@@ -55,16 +55,17 @@ export const RegisterForm: React.FC = () => {
       });
 
       setMessage(response.message);
-      reset();
 
-      setTimeout(async () => {
-        await loginUser({
-          email: data.email,
-          password: data.password,
-        });
-        await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
-        navigate({ to: "/profile" });
-      }, 1500);
+      // Register already sets the JWT cookie; clear old profile caches then load auth user.
+      queryClient.removeQueries({ queryKey: ["user", "me"] });
+      queryClient.removeQueries({ queryKey: ["users"] });
+      await queryClient.fetchQuery({
+        queryKey: ["auth", "me"],
+        queryFn: getCurrentUser,
+      });
+
+      reset();
+      navigate({ to: "/profile" });
     } catch (error: unknown) {
       setMessage(
         error instanceof Error ? error.message : "Erreur d'inscription",
