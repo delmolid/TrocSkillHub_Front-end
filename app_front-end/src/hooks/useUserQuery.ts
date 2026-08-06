@@ -49,6 +49,7 @@ export function useUpdateProfilUser() {
     onSuccess: (updatedUser) => {
       queryClient.setQueryData(["user", "me"], updatedUser);
       queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
+      queryClient.invalidateQueries({ queryKey: ["users"] });
     },
   });
 }

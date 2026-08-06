@@ -7,6 +7,7 @@ import {
   type skills,
   type UpdateProfilUserPayload,
 } from '../types/UserProfile.types';
+import { apiFetch } from './apiFetch';
 
 const normalizeKnowledgeItem = (item: RawKnowledgeItem): skills | needs => ({
   knowledgeId: item.knowledgeId ?? item.id,
@@ -34,9 +35,7 @@ const normalizePublicUser = (user: PublicUserProfile): PublicUserProfile => ({
 });
 
 export const getAllUsers = async (): Promise<PublicUserProfile[]> => {
-  const response = await fetch(`${API_USERS_URL}`, {
-    credentials: "include",
-  });
+  const response = await apiFetch(`${API_USERS_URL}`);
 
   if (!response.ok) {
     throw new Error(`Erreur HTTP: ${response.status}`);
@@ -48,9 +47,7 @@ export const getAllUsers = async (): Promise<PublicUserProfile[]> => {
 
 
 export const getUserById = async (): Promise<ApiUser> => {
-  const response = await fetch(`${API_USERS_URL}/me`, {
-    credentials: "include",
-  });
+  const response = await apiFetch(`${API_USERS_URL}/me`);
 
   if (!response.ok) {
     throw new Error(`Erreur HTTP: ${response.status}`);
@@ -63,12 +60,11 @@ export const getUserById = async (): Promise<ApiUser> => {
 export const updateProfilUser = async (
   payload: UpdateProfilUserPayload,
 ): Promise<ApiUser> => {
-  const response = await fetch(`${API_USERS_URL}/me`, {
+  const response = await apiFetch(`${API_USERS_URL}/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
     body: JSON.stringify(payload),
   });
 
@@ -87,12 +83,11 @@ export const updateProfilUser = async (
 };
 
 export const DeleteProfilUser = async (): Promise<void> => {
-  const response = await fetch(`${API_USERS_URL}/me`, {
+  const response = await apiFetch(`${API_USERS_URL}/me`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
   });
 
   if (!response.ok) {
@@ -131,9 +126,8 @@ export type ProfileDocumentResponse = {
 };
 
 export const exportProfileDocument = async (): Promise<string> => {
-  const response = await fetch(`${API_USERS_URL}/me/profile-document`, {
+  const response = await apiFetch(`${API_USERS_URL}/me/profile-document`, {
     method: "POST",
-    credentials: "include",
   });
 
   if (!response.ok) {
