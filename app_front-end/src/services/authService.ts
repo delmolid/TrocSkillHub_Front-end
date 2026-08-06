@@ -1,16 +1,16 @@
 import { API_AUTH_URL } from "../constantes";
 import type { CurrentUser, LoginPayload, RegisterPayload } from "../types/auth.types";
+import { apiFetch } from "./apiFetch";
 
 export const register = async (
   data: RegisterPayload,
 ): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${API_AUTH_URL}/register`, {
+    const response = await apiFetch(`${API_AUTH_URL}/register`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify(data),
     });
 
@@ -31,12 +31,11 @@ export const login = async (
   data: LoginPayload,
 ): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${API_AUTH_URL}/login`, {
+    const response = await apiFetch(`${API_AUTH_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify(data),
     });
 
@@ -55,9 +54,8 @@ export const login = async (
 
 export const logout = async (): Promise<{ message: string }> => {
   try {
-    const response = await fetch(`${API_AUTH_URL}/logout`, {
+    const response = await apiFetch(`${API_AUTH_URL}/logout`, {
       method: 'POST',
-      credentials: 'include',
     });
 
     const result = await response.json();
@@ -75,9 +73,8 @@ export const logout = async (): Promise<{ message: string }> => {
 
 export const getCurrentUser = async (): Promise<CurrentUser> => {
   try {
-    const response = await fetch(`${API_AUTH_URL}/me`, {
+    const response = await apiFetch(`${API_AUTH_URL}/me`, {
       method: 'GET',
-      credentials: 'include',
     });
 
     if (!response.ok) {

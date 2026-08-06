@@ -10,6 +10,8 @@ export function useLogoutUser() {
     mutationFn: logout,
     onSuccess: () => {
       queryClient.removeQueries({ queryKey: ["auth", "me"] });
+      queryClient.removeQueries({ queryKey: ["user", "me"] });
+      queryClient.removeQueries({ queryKey: ["users"] });
       navigate({ to: "/login" });
     },
   });

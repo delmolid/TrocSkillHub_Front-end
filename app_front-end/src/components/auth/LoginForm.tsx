@@ -5,7 +5,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import { login as loginUser } from "../../services/authService";
+import { getCurrentUser, login as loginUser } from "../../services/authService";
 import type { LoginFields } from "../../types/auth.types";
 import { AuthMessage } from "./AuthMessage";
 import { PasswordResetModal } from "./PasswordResetModal";
@@ -30,11 +30,16 @@ export const LoginForm: React.FC = () => {
     try {
       const response = await loginUser(data);
       setMessage(response.message);
-      await queryClient.invalidateQueries({ queryKey: ["auth", "me"] });
 
-      setTimeout(() => {
-        navigate({ to: "/profile" });
-      }, 1500);
+      // Clear profile caches from any previous session, then load the new auth user.
+      queryClient.removeQueries({ queryKey: ["user", "me"] });
+      queryClient.removeQueries({ queryKey: ["users"] });
+      await queryClient.fetchQuery({
+        queryKey: ["auth", "me"],
+        queryFn: getCurrentUser,
+      });
+
+      navigate({ to: "/profile" });
     } catch (error: unknown) {
       setMessage(error instanceof Error ? error.message : "Erreur de connexion");
     } finally {

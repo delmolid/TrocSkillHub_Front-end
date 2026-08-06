@@ -7,6 +7,7 @@ import type { ProfileItemField } from "./types/profile.types";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
 export const API_AUTH_URL = `${API_BASE_URL}/auth`;
+export const API_CSRF_URL = `${API_AUTH_URL}/csrf`;
 export const API_USERS_URL = `${API_BASE_URL}/users`;
 export const API_KNOWLEDGES_URL = `${API_BASE_URL}/knowledges`;
 export const API_PASSWORD_RESET_URL = `${API_AUTH_URL}/password-reset`;

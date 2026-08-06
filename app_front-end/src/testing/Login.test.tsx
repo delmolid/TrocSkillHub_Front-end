@@ -4,11 +4,13 @@ import { page } from "vitest/browser";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LoginForm } from "../components/auth/LoginForm";
 import { ToastProvider } from "../context/ToastContext";
+import { clearCsrfTokenCache } from "../services/apiFetch";
 import { ComponentTestRouter } from "./testRouter";
 
 beforeEach(() => {
   cleanup();
   vi.restoreAllMocks();
+  clearCsrfTokenCache();
 });
 
 const renderLoginForm = () => {
@@ -49,12 +51,32 @@ describe("LoginForm", () => {
   });
 
   test("calls the login API with the correct data on a valid submission", async () => {
-    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
-      new Response(JSON.stringify({ message: "Connexion réussie" }), {
-        status: 200,
-        headers: { "Content-Type": "application/json" },
-      }),
-    );
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = String(input);
+
+      if (url.includes("/auth/csrf")) {
+        return new Response(
+          JSON.stringify({
+            token: "test-csrf-token",
+            headerName: "X-XSRF-TOKEN",
+            parameterName: "_csrf",
+          }),
+          {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+
+      if (url.includes("/auth/login")) {
+        return new Response(JSON.stringify({ message: "Connexion réussie" }), {
+          status: 200,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      return new Response(null, { status: 404 });
+    });
 
     renderLoginForm();
 
@@ -67,10 +89,21 @@ describe("LoginForm", () => {
     await submitButton.click();
 
     await vi.waitFor(() => {
-      expect(globalThis.fetch).toHaveBeenCalledWith(
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.stringContaining("/auth/csrf"),
+        expect.objectContaining({ method: "GET", credentials: "include" }),
+      );
+      expect(fetchMock).toHaveBeenCalledWith(
         expect.stringContaining("/auth/login"),
-        expect.objectContaining({ method: "POST" }),
+        expect.objectContaining({ method: "POST", credentials: "include" }),
       );
     });
+
+    const loginCall = fetchMock.mock.calls.find(([url]) =>
+      String(url).includes("/auth/login"),
+    );
+    expect(loginCall).toBeDefined();
+    const loginHeaders = new Headers(loginCall?.[1]?.headers);
+    expect(loginHeaders.get("X-XSRF-TOKEN")).toBe("test-csrf-token");
   });
 });
